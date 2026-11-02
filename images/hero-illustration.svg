@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" width="100%" height="100%" fill="none">
+  <defs>
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(139, 92, 246, 0.4)"/>
+      <stop offset="100%" stop-color="rgba(30, 27, 75, 0.6)"/>
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(249, 115, 22, 0.3)"/>
+      <stop offset="100%" stop-color="rgba(79, 70, 229, 0.4)"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Glowing background orbs -->
+  <circle cx="280" cy="220" r="160" fill="url(#purpleGrad)" opacity="0.25" filter="blur(60px)"/>
+  <circle cx="420" cy="300" r="120" fill="url(#orangeGrad)" opacity="0.2" filter="blur(50px)"/>
+
+  <!-- Main Showcase Card Mockup -->
+  <g filter="url(#shadow)" transform="translate(60, 40)">
+    <rect width="420" height="280" rx="24" fill="#131b31" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+    <!-- Card header banner -->
+    <path d="M0 24 Q0 0 24 0 L396 0 Q420 0 420 24 L420 120 L0 120 Z" fill="url(#cardGrad1)"/>
+    
+    <!-- Category Pill -->
+    <rect x="24" y="24" width="110" height="28" rx="14" fill="rgba(139, 92, 246, 0.5)"/>
+    <text x="79" y="42" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">TECHNOLOGY</text>
+
+    <!-- Live indicator -->
+    <circle cx="380" cy="38" r="6" fill="#10B981"/>
+    <circle cx="380" cy="38" r="10" stroke="#10B981" stroke-width="1.5" opacity="0.5"/>
+
+    <!-- Title & details -->
+    <text x="24" y="160" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="800" fill="#f8fafc">Global Tech Summit 2026</text>
+    <text x="24" y="185" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" fill="#94a3b8">📍 Bangalore Convention Centre &bull; Nov 18, 2026</text>
+    
+    <!-- Progress / Seats left bar -->
+    <rect x="24" y="215" width="260" height="6" rx="3" fill="rgba(255,255,255,0.1)"/>
+    <rect x="24" y="215" width="210" height="6" rx="3" fill="url(#orangeGrad)"/>
+    <text x="24" y="240" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#e2e8f0"><tspan font-weight="700" fill="#f97316">85%</tspan> Seats Reserved</text>
+
+    <!-- Mini Avatar stack -->
+    <g transform="translate(300, 205)">
+      <circle cx="30" cy="15" r="14" fill="#6366F1" stroke="#131b31" stroke-width="2"/>
+      <circle cx="50" cy="15" r="14" fill="#EC4899" stroke="#131b31" stroke-width="2"/>
+      <circle cx="70" cy="15" r="14" fill="#10B981" stroke="#131b31" stroke-width="2"/>
+      <text x="96" y="20" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="#94a3b8">+1.4k</text>
+    </g>
+  </g>
+
+  <!-- Floating Floating Badge 1: Live Attendees -->
+  <g filter="url(#shadow)" transform="translate(340, 280)">
+    <rect width="210" height="76" rx="18" fill="#1a233d" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+    <circle cx="38" cy="38" r="22" fill="rgba(249, 115, 22, 0.2)"/>
+    <!-- Ticket Icon -->
+    <path d="M28 38 L48 38 M34 32 L42 44" stroke="#F97316" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="70" y="32" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" fill="#94a3b8">Instant Access</text>
+    <text x="70" y="54" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="800" fill="#f8fafc">Digital QR Pass</text>
+  </g>
+
+  <!-- Floating Badge 2: Verified Rating -->
+  <g filter="url(#shadow)" transform="translate(10, 260)">
+    <rect width="180" height="70" rx="16" fill="#1a233d" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+    <circle cx="36" cy="35" r="18" fill="rgba(16, 185, 129, 0.2)"/>
+    <path d="M30 35 L34 39 L42 30" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="64" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" fill="#94a3b8">Verified Rating</text>
+    <text x="64" y="50" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" font-weight="800" fill="#f8fafc">4.9 / 5.0 ★</text>
+  </g>
+</svg>

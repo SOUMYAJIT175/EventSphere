@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>EventSphere – Discover Events. Create Memories.</title>
+  <meta name="description" content="EventSphere is a premier event management and discovery platform. Explore curated events across Technology, Music, Sports, Education, Business, and Arts." />
+  <meta name="keywords" content="events, event management, tech summit, indie music, marathon, business expo, webinars, workshops, tickets" />
+  <meta name="author" content="EventSphere Team" />
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="EventSphere – Discover Events. Create Memories." />
+  <meta property="og:description" content="Explore and register for premier conferences, music festivals, sports meets, and cultural exhibitions." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/logo.svg" />
+
+  <!-- Google Fonts: Plus Jakarta Sans & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="images/logo.svg" />
+</head>
+<body>
+
+  <!-- ======================================================================
+       NAVIGATION BAR
+       ====================================================================== -->
+  <header class="navbar" id="topNavbar">
+    <div class="container nav-container">
+      <!-- Brand Logo -->
+      <a href="#home" class="brand-logo" aria-label="EventSphere Home">
+        <img src="images/logo.svg" alt="EventSphere Logo" />
+      </a>
+
+      <!-- Desktop & Mobile Navigation Links -->
+      <nav class="nav-menu" id="primaryNavMenu" aria-label="Main Navigation">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#events" class="nav-link">Explore Events</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#why-us" class="nav-link">Why Choose Us</a>
+        <a href="#testimonials" class="nav-link">Testimonials</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Action Buttons & Theme Toggle -->
+      <div class="nav-actions">
+        <!-- Dark/Light Theme Toggle -->
+        <button class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
+          <i class="fa-solid fa-sun"></i>
+          <span class="theme-text">Light Mode</span>
+        </button>
+
+        <!-- My Tickets Trigger -->
+        <button class="btn-my-tickets" title="View My Registered Events" aria-label="View My Tickets">
+          <i class="fa-solid fa-ticket"></i>
+          <span>My Tickets</span>
+          <span class="my-tickets-badge">0</span>
+        </button>
+
+        <!-- Get Started / Register CTA -->
+        <a href="#register" class="btn btn-primary btn-sm btn-get-started">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Register Now</span>
+        </a>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open Navigation Menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ====================================================================
+         HOMEPAGE HERO SECTION
+         ==================================================================== -->
+    <section class="hero-section" id="home">
+      <div class="container">
+        <div class="hero-grid">
+          <!-- Left Column: Copy & Actions -->
+          <div class="hero-content">
+            <div class="hero-eyebrow">
+              <i class="fa-solid fa-sparkles"></i>
+              <span>Next-Gen Event Experience Platform</span>
+            </div>
+
+            <h1 class="hero-title">
+              Discover Events. <br />
+              <span class="text-gradient">Create Memories.</span>
+            </h1>
+
+            <p class="hero-description">
+              Connect with extraordinary experiences, world-class conferences, vibrant music festivals, and sports competitions. Book your verified digital pass seamlessly in seconds.
+            </p>
+
+            <div class="hero-cta-group">
+              <a href="#events" class="btn btn-primary btn-lg">
+                <i class="fa-solid fa-compass"></i>
+                <span>Explore Events</span>
+              </a>
+              <button class="btn btn-outline btn-lg btn-open-host-modal">
+                <i class="fa-solid fa-bullhorn"></i>
+                <span>Host an Event</span>
+              </button>
+            </div>
+
+            <!-- Hero Live Statistics -->
+            <div class="hero-stats-row">
+              <div class="stat-item">
+                <div class="stat-number">500<span>+</span></div>
+                <div class="stat-label">Curated Events</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">120k<span>+</span></div>
+                <div class="stat-label">Active Attendees</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">6<span>+</span></div>
+                <div class="stat-label">Dynamic Categories</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">99.4<span>%</span></div>
+                <div class="stat-label">Satisfaction Rate</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Visual Showcase Mockup -->
+          <div class="hero-visual">
+            <div class="hero-graphic-wrap">
+              <img src="images/hero-illustration.svg" alt="EventSphere interactive experience illustration" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         FEATURED EVENT LIVE COUNTDOWN BANNER
+         ==================================================================== -->
+    <section class="countdown-banner-section" aria-label="Upcoming Featured Event Live Countdown">
+      <div class="container">
+        <div class="countdown-card">
+          <div class="countdown-inner">
+            <!-- Event Info -->
+            <div class="countdown-info-col">
+              <div class="countdown-status-pill" id="countdownStatusText">
+                <span class="status-live-pulse"></span>
+                <span>Live Countdown &bull; Premier Summit</span>
+              </div>
+              <h2 class="countdown-event-name" id="countdownEventTitle">
+                Global Tech Innovators Summit 2026
+              </h2>
+              <p class="text-muted" style="font-size: 0.9rem;">
+                <i class="fa-regular fa-clock"></i> Hurry! Early bird passes are running out fast.
+              </p>
+            </div>
+
+            <!-- Dynamic Countdown Display -->
+            <div class="countdown-timer-grid" role="timer" aria-live="polite">
+              <div class="timer-box">
+                <span class="timer-val" id="countDays">00</span>
+                <span class="timer-lbl">Days</span>
+              </div>
+              <div class="timer-box">
+                <span class="timer-val" id="countHours">00</span>
+                <span class="timer-lbl">Hours</span>
+              </div>
+              <div class="timer-box">
+                <span class="timer-val" id="countMinutes">00</span>
+                <span class="timer-lbl">Minutes</span>
+              </div>
+              <div class="timer-box">
+                <span class="timer-val" id="countSeconds">00</span>
+                <span class="timer-lbl">Seconds</span>
+              </div>
+            </div>
+
+            <!-- Quick Action Button -->
+            <div class="countdown-action-col">
+              <button class="btn btn-accent btn-lg" onclick="window.EventSphereReg.selectEventForRegistration('evt-tech-01')">
+                <i class="fa-solid fa-ticket"></i>
+                <span>Claim Your Pass</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         FEATURED SPOTLIGHT SECTION
+         ==================================================================== -->
+    <section class="spotlight-section" id="featured">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <i class="fa-solid fa-star"></i>
+            <span>Editor's Picks</span>
+          </div>
+          <h2 class="section-title">Featured Highlights</h2>
+          <p class="section-subtitle">
+            Handpicked marquee events drawing international leaders, celebrated creators, and industry pioneers.
+          </p>
+        </div>
+
+        <div class="spotlight-grid" id="featuredSpotlightContainer">
+          <!-- Top 3 Featured events rendered dynamically by app.js -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         EXPLORE EVENTS SECTION (FILTERS, SEARCH, SORT & CARDS)
+         ==================================================================== -->
+    <section class="explore-events-section" id="events">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>All Gatherings</span>
+          </div>
+          <h2 class="section-title">Explore Upcoming Events</h2>
+          <p class="section-subtitle">
+            Find the right event for your passion. Filter by category, search by name or location, and register instantly.
+          </p>
+        </div>
+
+        <!-- Filter & Search Toolbar -->
+        <div class="events-toolbar">
+          <div class="toolbar-top-row">
+            <!-- Search Bar -->
+            <div class="search-box-wrap">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input 
+                type="text" 
+                id="eventSearchInput" 
+                class="search-input" 
+                placeholder="Search by event title, city, or venue..." 
+                aria-label="Search events by name, city, or venue"
+              />
+              <button class="clear-search-btn" id="clearSearchBtn" aria-label="Clear search query">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <!-- Sort & View Layout Controls -->
+            <div class="toolbar-controls">
+              <div class="sort-select-wrap">
+                <i class="fa-solid fa-arrow-down-short-wide"></i>
+                <select id="eventSortSelect" class="sort-select" aria-label="Sort events">
+                  <option value="date-asc">Date: Soonest First</option>
+                  <option value="date-desc">Date: Latest First</option>
+                  <option value="title-asc">Title: A to Z</option>
+                  <option value="title-desc">Title: Z to A</option>
+                  <option value="price-low">Price: Low to High</option>
+                </select>
+              </div>
+
+              <!-- View Switcher -->
+              <div class="view-toggle-group">
+                <button class="btn-view-toggle active" id="viewGridBtn" title="Grid Layout" aria-label="Grid Layout">
+                  <i class="fa-solid fa-table-cells-large"></i>
+                </button>
+                <button class="btn-view-toggle" id="viewListBtn" title="List Layout" aria-label="List Layout">
+                  <i class="fa-solid fa-list-ul"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Filter Buttons -->
+          <div class="category-filter-list" role="tablist" aria-label="Filter events by category">
+            <button class="category-filter-btn active" data-category="all" role="tab" aria-selected="true">
+              <i class="fa-solid fa-border-all"></i> All Events
+            </button>
+            <button class="category-filter-btn" data-category="Technology" role="tab" aria-selected="false">
+              <i class="fa-solid fa-microchip"></i> Technology
+            </button>
+            <button class="category-filter-btn" data-category="Music" role="tab" aria-selected="false">
+              <i class="fa-solid fa-guitar"></i> Music
+            </button>
+            <button class="category-filter-btn" data-category="Sports" role="tab" aria-selected="false">
+              <i class="fa-solid fa-person-running"></i> Sports
+            </button>
+            <button class="category-filter-btn" data-category="Education" role="tab" aria-selected="false">
+              <i class="fa-solid fa-graduation-cap"></i> Education
+            </button>
+            <button class="category-filter-btn" data-category="Business" role="tab" aria-selected="false">
+              <i class="fa-solid fa-briefcase"></i> Business
+            </button>
+            <button class="category-filter-btn" data-category="Arts & Culture" role="tab" aria-selected="false">
+              <i class="fa-solid fa-palette"></i> Arts &amp; Culture
+            </button>
+          </div>
+        </div>
+
+        <!-- Results Counter & Status -->
+        <div class="events-results-header">
+          <span class="events-count-badge" id="eventsCountBadge">Loading events...</span>
+        </div>
+
+        <!-- Events Grid (Rendered dynamically by app.js) -->
+        <div class="events-grid" id="eventsGrid" aria-live="polite">
+          <!-- Dynamic event cards injected here -->
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         EVENT REGISTRATION FORM SECTION
+         ==================================================================== -->
+    <section class="registration-section" id="register">
+      <div class="container">
+        <div class="registration-layout">
+          <!-- Left Column: Benefits & Guarantee -->
+          <div class="reg-benefits-card">
+            <div class="section-tag">
+              <i class="fa-solid fa-shield-check"></i>
+              <span>Frictionless Booking</span>
+            </div>
+            <h3>Why Register on <span class="text-gradient">EventSphere</span>?</h3>
+            <p>
+              Experience seamless ticket reservations with real-time seat tracking, zero hidden booking charges, and immediate verified digital entry credentials.
+            </p>
+
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fa-solid fa-qrcode"></i>
+              </div>
+              <div class="benefit-text">
+                <h4>Instant Digital QR Pass</h4>
+                <p>Receive your admission pass with unique confirmation barcode immediately upon registration.</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fa-solid fa-certificate"></i>
+              </div>
+              <div class="benefit-text">
+                <h4>Verified Event Organizers</h4>
+                <p>Every event is audited for authenticity, venue safety protocols, and certified schedules.</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fa-solid fa-bell"></i>
+              </div>
+              <div class="benefit-text">
+                <h4>Automated Reminders</h4>
+                <p>Stay up to date with schedule alerts, directions, and speaker notes directly via email.</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+              </div>
+              <div class="benefit-text">
+                <h4>Manage &amp; Print Anytime</h4>
+                <p>Access your booked tickets locally at any time through our built-in ticket wallet.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Registration Form -->
+          <div class="registration-form-card">
+            <div class="form-header">
+              <h3>Secure Your Spot</h3>
+              <p>Fill in your details below to register for your selected event.</p>
+            </div>
+
+            <form id="eventRegistrationForm" novalidate>
+              <!-- Full Name -->
+              <div class="form-group">
+                <label for="regFullName" class="form-label">
+                  Full Name <span class="req">*</span>
+                </label>
+                <div class="form-control-wrap">
+                  <i class="fa-regular fa-user input-icon"></i>
+                  <input 
+                    type="text" 
+                    id="regFullName" 
+                    class="form-control" 
+                    placeholder="e.g. Rahul Sharma" 
+                    required 
+                    autocomplete="name"
+                  />
+                </div>
+                <div class="field-error-msg" id="regFullNameError"></div>
+              </div>
+
+              <!-- Two Column: Email & Phone -->
+              <div class="form-row">
+                <!-- Email -->
+                <div class="form-group">
+                  <label for="regEmail" class="form-label">
+                    Email Address <span class="req">*</span>
+                  </label>
+                  <div class="form-control-wrap">
+                    <i class="fa-regular fa-envelope input-icon"></i>
+                    <input 
+                      type="email" 
+                      id="regEmail" 
+                      class="form-control" 
+                      placeholder="e.g. rahul@example.com" 
+                      required 
+                      autocomplete="email"
+                    />
+                  </div>
+                  <div class="field-error-msg" id="regEmailError"></div>
+                </div>
+
+                <!-- Phone (Indian format) -->
+                <div class="form-group">
+                  <label for="regPhone" class="form-label">
+                    Mobile Number (10 digits) <span class="req">*</span>
+                  </label>
+                  <div class="form-control-wrap">
+                    <i class="fa-solid fa-phone input-icon"></i>
+                    <input 
+                      type="tel" 
+                      id="regPhone" 
+                      class="form-control" 
+                      placeholder="e.g. 9876543210" 
+                      required 
+                      maxlength="15"
+                      autocomplete="tel"
+                    />
+                  </div>
+                  <div class="field-error-msg" id="regPhoneError"></div>
+                </div>
+              </div>
+
+              <!-- Selected Event Dropdown -->
+              <div class="form-group">
+                <label for="regEventSelect" class="form-label">
+                  Selected Event <span class="req">*</span>
+                </label>
+                <div class="form-control-wrap">
+                  <i class="fa-regular fa-calendar-check input-icon"></i>
+                  <select id="regEventSelect" class="form-control form-select" required>
+                    <option value="" disabled selected>-- Select an Event to Attend --</option>
+                    <!-- Injected dynamically via events-data.js -->
+                  </select>
+                </div>
+                <div class="field-error-msg" id="regEventSelectError"></div>
+              </div>
+
+              <!-- Two Column: Ticket Tier & Count -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="regTicketType" class="form-label">Pass Tier</label>
+                  <div class="form-control-wrap">
+                    <i class="fa-solid fa-layer-group input-icon"></i>
+                    <select id="regTicketType" class="form-control form-select">
+                      <option value="General Admission">General Admission</option>
+                      <option value="VIP Access Pass">VIP Access Pass (Priority Entry)</option>
+                      <option value="Student Pass">Student Pass (ID Required)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="regTicketsCount" class="form-label">Tickets</label>
+                  <div class="form-control-wrap">
+                    <i class="fa-solid fa-ticket input-icon"></i>
+                    <select id="regTicketsCount" class="form-control form-select">
+                      <option value="1">1 Person</option>
+                      <option value="2">2 Persons</option>
+                      <option value="3">3 Persons</option>
+                      <option value="4">4 Persons</option>
+                      <option value="5">5 Persons</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Special Requests (Optional) -->
+              <div class="form-group">
+                <label for="regNotes" class="form-label">Dietary or Accessibility Needs (Optional)</label>
+                <input 
+                  type="text" 
+                  id="regNotes" 
+                  class="form-control" 
+                  style="padding-left: 16px;" 
+                  placeholder="e.g. Vegetarian meal, wheelchair assistance" 
+                />
+              </div>
+
+              <!-- Terms and Conditions Checkbox -->
+              <div class="form-group">
+                <div class="terms-checkbox-wrap">
+                  <input type="checkbox" id="regTerms" required />
+                  <label for="regTerms">
+                    I agree to the <a href="#about" style="color: var(--primary-purple); text-decoration: underline;">Terms &amp; Conditions</a> and understand that duplicate registrations for the same event are restricted.
+                  </label>
+                </div>
+                <div class="field-error-msg" id="regTermsError"></div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-primary btn-submit-reg" id="regSubmitBtn">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Complete Registration</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         ABOUT US SECTION
+         ==================================================================== -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <!-- Text Content -->
+          <div class="about-text">
+            <div class="section-tag">
+              <i class="fa-solid fa-circle-info"></i>
+              <span>Our Mission</span>
+            </div>
+            <h3>Connecting People Through <span class="text-gradient">Transformative Experiences</span></h3>
+            <p>
+              EventSphere was built with a singular vision: to eliminate the friction in discovering, planning, and attending events that inspire personal and professional growth. Whether you are an ambitious engineer, an indie music lover, or an endurance athlete, EventSphere is your companion in finding your next defining moment.
+            </p>
+            <p>
+              We empower organizers with reliable discovery tools and give attendees a clutter-free, responsive booking experience backed by verifiable digital ticketing and robust privacy standards.
+            </p>
+
+            <div class="about-stats-pill-grid">
+              <div class="about-stat-box">
+                <h4>20+ Cities</h4>
+                <span>Across India &amp; Global Hubs</span>
+              </div>
+              <div class="about-stat-box">
+                <h4>100% Free</h4>
+                <span>No Hidden Transaction Fees</span>
+              </div>
+              <div class="about-stat-box">
+                <h4>Instant Passes</h4>
+                <span>Digital QR Access Pass</span>
+              </div>
+              <div class="about-stat-box">
+                <h4>24/7 Care</h4>
+                <span>Dedicated Attendee Helpdesk</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature Cards / Visual -->
+          <div class="about-visual">
+            <div class="feature-box" style="margin-bottom: 20px;">
+              <div class="feature-icon-wrap">
+                <i class="fa-solid fa-compass"></i>
+              </div>
+              <h4>Effortless Discovery</h4>
+              <p>Advanced real-time filters and search algorithms let you locate relevant workshops, summits, and festivals without clutter.</p>
+            </div>
+            <div class="feature-box">
+              <div class="feature-icon-wrap" style="background: var(--grad-accent);">
+                <i class="fa-solid fa-handshake-angle"></i>
+              </div>
+              <h4>Community-First Ethos</h4>
+              <p>Designed for colleges, professional communities, and independent artists to foster genuine human connections.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         WHY CHOOSE US SECTION
+         ==================================================================== -->
+    <section class="why-choose-section" id="why-us">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <i class="fa-solid fa-medal"></i>
+            <span>Key Advantages</span>
+          </div>
+          <h2 class="section-title">Why Choose EventSphere?</h2>
+          <p class="section-subtitle">
+            Engineered from the ground up for speed, reliability, and delightful attendee engagement.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <!-- Feature 1 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrap">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h4>Easy Event Discovery</h4>
+            <p>Interactive category pills, live debounced search, and date sorting deliver immediate results tailored to your interests.</p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrap">
+              <i class="fa-solid fa-fingerprint"></i>
+            </div>
+            <h4>Simple 1-Click Registration</h4>
+            <p>Clean, frictionless registration forms with robust validation, duplicate prevention, and zero unnecessary paperwork.</p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrap">
+              <i class="fa-solid fa-shapes"></i>
+            </div>
+            <h4>Multiple Event Categories</h4>
+            <p>A comprehensive ecosystem featuring Technology, Music, Sports, Education, Business, and Arts &amp; Culture.</p>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrap">
+              <i class="fa-solid fa-mobile-screen-button"></i>
+            </div>
+            <h4>User-Friendly Experience</h4>
+            <p>Seamlessly responsive on desktops, tablets, and mobile devices with smooth theme toggling and LocalStorage ticket persistence.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         TESTIMONIALS SECTION
+         ==================================================================== -->
+    <section class="testimonials-section" id="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">
+            <i class="fa-solid fa-quote-left"></i>
+            <span>Attendee Voices</span>
+          </div>
+          <h2 class="section-title">Loved by Thousands</h2>
+          <p class="section-subtitle">
+            Hear from participants, performers, and organizers who rely on EventSphere for unforgettable events.
+          </p>
+        </div>
+
+        <div class="testimonials-grid">
+          <!-- Testimonial 1 -->
+          <article class="testimonial-card">
+            <div>
+              <div class="testimonial-stars" aria-label="5 out of 5 stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="testimonial-quote">
+                "Registering for the Tech Summit was buttery smooth. The instant digital ticket with the unique barcode allowed me to breeze right through registration at the venue!"
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Priya Natarajan avatar" />
+              <div class="author-info">
+                <h5>Priya Natarajan</h5>
+                <span>Software Engineer, Bangalore</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Testimonial 2 -->
+          <article class="testimonial-card">
+            <div>
+              <div class="testimonial-stars" aria-label="5 out of 5 stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="testimonial-quote">
+                "EventSphere's category filtering and live countdown timer made discovering local indie concerts so exciting. It looks and performs better than many commercial booking apps."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Arjun Mehra avatar" />
+              <div class="author-info">
+                <h5>Arjun Mehra</h5>
+                <span>Music Producer &amp; Indie Artist, Pune</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Testimonial 3 -->
+          <article class="testimonial-card">
+            <div>
+              <div class="testimonial-stars" aria-label="5 out of 5 stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="testimonial-quote">
+                "The duplicate registration guard and offline ticket storage in LocalStorage are lifesavers for students managing marathon passes. Phenomenal UI attention to detail!"
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" alt="Dr. Sneha Roy avatar" />
+              <div class="author-info">
+                <h5>Dr. Sneha Roy</h5>
+                <span>College Sports Coordinator, Mumbai</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         CONTACT US SECTION
+         ==================================================================== -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="contact-layout">
+          <!-- Left Column: Contact Cards -->
+          <div class="contact-info-col">
+            <div class="section-tag">
+              <i class="fa-regular fa-paper-plane"></i>
+              <span>Get in Touch</span>
+            </div>
+            <h3>Have Questions? <br /><span class="text-gradient">We are Here to Help.</span></h3>
+            <p>
+              Whether you are an attendee with questions about an upcoming event or an organizer looking to showcase your conference, our team is always ready to assist.
+            </p>
+
+            <div class="contact-cards-stack">
+              <div class="contact-info-card">
+                <div class="contact-card-icon">
+                  <i class="fa-regular fa-envelope"></i>
+                </div>
+                <div class="contact-card-details">
+                  <strong>Email Support</strong>
+                  <span>support@eventsphere.io</span>
+                </div>
+              </div>
+
+              <div class="contact-info-card">
+                <div class="contact-card-icon">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div class="contact-card-details">
+                  <strong>Helpline Number</strong>
+                  <span>+91 98765 43210</span>
+                </div>
+              </div>
+
+              <div class="contact-info-card">
+                <div class="contact-card-icon">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="contact-card-details">
+                  <strong>Headquarters</strong>
+                  <span>Innovation Hub, Koramangala, Bangalore</span>
+                </div>
+              </div>
+
+              <div class="contact-info-card">
+                <div class="contact-card-icon">
+                  <i class="fa-regular fa-clock"></i>
+                </div>
+                <div class="contact-card-details">
+                  <strong>Support Hours</strong>
+                  <span>Mon – Sat: 9:00 AM – 7:00 PM IST</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Contact Form -->
+          <div class="contact-form-card">
+            <h4>Send us a Message</h4>
+            <p>Fill out this form and our support desk will respond within 24 hours.</p>
+
+            <form id="contactUsForm" novalidate>
+              <div class="form-group">
+                <label for="contactName" class="form-label">Full Name <span class="req">*</span></label>
+                <div class="form-control-wrap">
+                  <i class="fa-regular fa-user input-icon"></i>
+                  <input type="text" id="contactName" class="form-control" placeholder="Your name" required />
+                </div>
+                <div class="field-error-msg" id="contactNameError"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactEmail" class="form-label">Email Address <span class="req">*</span></label>
+                <div class="form-control-wrap">
+                  <i class="fa-regular fa-envelope input-icon"></i>
+                  <input type="email" id="contactEmail" class="form-control" placeholder="Your email address" required />
+                </div>
+                <div class="field-error-msg" id="contactEmailError"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactSubject" class="form-label">Subject <span class="req">*</span></label>
+                <div class="form-control-wrap">
+                  <i class="fa-solid fa-tag input-icon"></i>
+                  <input type="text" id="contactSubject" class="form-control" placeholder="What is this regarding?" required />
+                </div>
+                <div class="field-error-msg" id="contactSubjectError"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactMessage" class="form-label">Message <span class="req">*</span></label>
+                <textarea id="contactMessage" class="form-control" rows="4" placeholder="Write your message here..." required></textarea>
+                <div class="field-error-msg" id="contactMessageError"></div>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; height: 50px;">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Send Message</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         NEWSLETTER SUBSCRIPTION CTA
+         ==================================================================== -->
+    <section class="newsletter-section">
+      <div class="container">
+        <div class="newsletter-box">
+          <div class="newsletter-text">
+            <h3>Never Miss an Event</h3>
+            <p>Subscribe to our weekly digest for early ticket drops, exclusive speaker interviews, and discounts.</p>
+          </div>
+          <form id="newsletterForm" class="newsletter-form-wrap" novalidate>
+            <input type="email" id="newsletterEmail" placeholder="Enter your email..." required aria-label="Newsletter email address" />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <!-- Brand Info -->
+        <div class="footer-brand">
+          <a href="#home" class="brand-logo" aria-label="EventSphere Home">
+            <img src="images/logo.svg" alt="EventSphere Logo" />
+          </a>
+          <p>
+            EventSphere is a state-of-the-art event management and ticketing platform developed as a college web designing project. Experience modern frontend craftsmanship.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Twitter">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="GitHub">
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-column">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#events">Explore Events</a></li>
+            <li><a href="#about">About Platform</a></li>
+            <li><a href="#why-us">Why Choose Us</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact Support</a></li>
+          </ul>
+        </div>
+
+        <!-- Categories -->
+        <div class="footer-column">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="#events" onclick="document.querySelector('[data-category=\'Technology\']').click()">Technology</a></li>
+            <li><a href="#events" onclick="document.querySelector('[data-category=\'Music\']').click()">Music &amp; Festivals</a></li>
+            <li><a href="#events" onclick="document.querySelector('[data-category=\'Sports\']').click()">Sports &amp; Fitness</a></li>
+            <li><a href="#events" onclick="document.querySelector('[data-category=\'Business\']').click()">Business &amp; Startups</a></li>
+            <li><a href="#events" onclick="document.querySelector('[data-category=\'Education\']').click()">Education &amp; Careers</a></li>
+            <li><a href="#events" onclick="document.querySelector('[data-category=\'Arts & Culture\']').click()">Arts &amp; Culture</a></li>
+          </ul>
+        </div>
+
+        <!-- Help & Legal -->
+        <div class="footer-column">
+          <h4>Platform Status</h4>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 10px;">
+            All client-side components and LocalStorage services active.
+          </p>
+          <div class="system-status-pill">
+            <span class="status-dot-green"></span>
+            <span>All Systems Operational</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Bottom Strip -->
+      <div class="footer-bottom">
+        <p>&copy; 2026 EventSphere Inc. Developed for College Web Designing Project. All rights reserved.</p>
+        <p>Built with Semantic HTML5, CSS3 &amp; Vanilla JavaScript (ES6+).</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ======================================================================
+       MODAL 1: EVENT DETAILS MODAL
+       ====================================================================== -->
+  <div class="es-modal" id="eventDetailsModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-dialog">
+      <button class="modal-close-cross" aria-label="Close details dialog">&times;</button>
+      
+      <div class="modal-banner-wrap">
+        <img id="modalBannerImg" src="images/fallback-event.svg" alt="Event Banner" />
+      </div>
+
+      <div class="modal-content-body">
+        <div class="modal-header-meta">
+          <span class="modal-cat-tag" id="modalCategory">Category</span>
+          <span class="modal-price-tag" id="modalPrice">₹0</span>
+        </div>
+
+        <h3 class="modal-title" id="modalTitle">Event Title</h3>
+
+        <div class="modal-quick-strip">
+          <div class="quick-strip-item" id="modalDate">
+            <i class="fa-regular fa-calendar-days"></i> Date &amp; Time
+          </div>
+          <div class="quick-strip-item" id="modalVenue">
+            <i class="fa-solid fa-location-dot"></i> Venue &amp; City
+          </div>
+        </div>
+
+        <!-- Full Description -->
+        <div class="modal-section-block">
+          <h4><i class="fa-solid fa-align-left"></i> About This Event</h4>
+          <p class="modal-desc-text" id="modalDesc"></p>
+        </div>
+
+        <!-- Highlights -->
+        <div class="modal-section-block">
+          <h4><i class="fa-solid fa-stars"></i> Event Highlights</h4>
+          <ul class="highlights-list" id="modalHighlightsList"></ul>
+        </div>
+
+        <!-- Schedule -->
+        <div class="modal-section-block">
+          <h4><i class="fa-regular fa-clock"></i> Schedule &amp; Agenda</h4>
+          <div id="modalScheduleList"></div>
+        </div>
+
+        <!-- Speakers -->
+        <div class="modal-section-block">
+          <h4><i class="fa-solid fa-microphone"></i> Featured Speakers / Hosts</h4>
+          <div class="speakers-list" id="modalSpeakersList"></div>
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="modal-footer-actions">
+          <div class="modal-spots-info">
+            <i class="fa-solid fa-ticket-simple"></i>
+            <span id="modalSpotsLeft">Spots remaining</span>
+          </div>
+          <div class="modal-actions-right">
+            <button class="btn btn-outline" id="modalShareBtn">
+              <i class="fa-solid fa-share-nodes"></i> Share
+            </button>
+            <button class="btn btn-primary" id="modalRegisterBtn">
+              <i class="fa-solid fa-ticket"></i> Register Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ======================================================================
+       MODAL 2: REGISTRATION CONFIRMATION & DIGITAL PASS MODAL
+       ====================================================================== -->
+  <div class="es-modal" id="registrationSuccessModal" role="dialog" aria-modal="true" aria-labelledby="confHeaderTitle">
+    <div class="modal-dialog ticket-pass-dialog">
+      <button class="modal-close-cross close-confirmation-modal" aria-label="Close pass dialog">&times;</button>
+      
+      <div class="ticket-pass-header">
+        <h3 id="confHeaderTitle"><i class="fa-solid fa-circle-check"></i> Registration Confirmed!</h3>
+        <p>Your admission pass has been generated and saved to your tickets wallet.</p>
+      </div>
+
+      <div class="digital-pass-card" id="digitalPassCard">
+        <div class="pass-id-ribbon">
+          CONFIRMATION ID: <span id="confRegId">ES-TECH-2026</span>
+        </div>
+
+        <h4 class="pass-event-title" id="confEvent">Event Name</h4>
+
+        <div class="pass-details-grid">
+          <div class="pass-row">
+            <strong>Participant Name</strong>
+            <span id="confName">John Doe</span>
+          </div>
+          <div class="pass-row">
+            <strong>Contact Email</strong>
+            <span id="confEmail">john@example.com</span>
+          </div>
+          <div class="pass-row">
+            <strong>Phone Number</strong>
+            <span id="confPhone">+91 9876543210</span>
+          </div>
+          <div class="pass-row">
+            <strong>Date &amp; Time</strong>
+            <span id="confDate">Date info</span>
+          </div>
+          <div class="pass-row">
+            <strong>Venue</strong>
+            <span id="confVenue">Venue info</span>
+          </div>
+          <div class="pass-row">
+            <strong>Pass Tier &amp; Count</strong>
+            <span id="confTicketType">General Admission</span> (<span id="confTicketCount">1 Ticket</span>)
+          </div>
+        </div>
+
+        <div class="pass-qr-strip">
+          <div class="pass-qr-icon">
+            <i class="fa-solid fa-qrcode"></i>
+          </div>
+          <div class="pass-qr-text">
+            <strong>OFFICIAL ADMISSION PASS</strong><br />
+            Present this digital QR pass or printed copy at the reception desk.
+          </div>
+        </div>
+      </div>
+
+      <div class="ticket-modal-actions">
+        <button class="btn btn-outline" id="confPrintBtn">
+          <i class="fa-solid fa-print"></i> Print Pass
+        </button>
+        <button class="btn btn-primary close-confirmation-modal">
+          <i class="fa-solid fa-check"></i> Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ======================================================================
+       MODAL 3: MY TICKETS WALLET MODAL
+       ====================================================================== -->
+  <div class="es-modal" id="myTicketsModal" role="dialog" aria-modal="true" aria-labelledby="myTicketsTitle">
+    <div class="modal-dialog tickets-list-dialog">
+      <button class="modal-close-cross close-tickets-modal" aria-label="Close my tickets dialog">&times;</button>
+      
+      <div class="my-tickets-modal-body">
+        <div class="section-tag" style="margin-bottom: 8px;">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Personal Ticket Wallet</span>
+        </div>
+        <h3 id="myTicketsTitle">My Registered Events</h3>
+        <p class="sub">These tickets are stored securely in your browser's LocalStorage and will persist across refreshes.</p>
+
+        <div id="myTicketsContainer">
+          <!-- Injected dynamically by registration.js -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ======================================================================
+       MODAL 4: HOST AN EVENT PROPOSAL MODAL
+       ====================================================================== -->
+  <div class="es-modal" id="hostEventModal" role="dialog" aria-modal="true" aria-labelledby="hostModalTitle">
+    <div class="modal-dialog" style="max-width: 600px;">
+      <button class="modal-close-cross close-host-modal" aria-label="Close host dialog">&times;</button>
+
+      <div class="modal-content-body">
+        <div class="section-tag" style="margin-bottom: 8px;">
+          <i class="fa-solid fa-bullhorn"></i>
+          <span>Organizer Portal</span>
+        </div>
+        <h3 id="hostModalTitle" style="font-size: 1.6rem; margin-bottom: 8px;">Submit Event Proposal</h3>
+        <p class="text-muted" style="font-size: 0.92rem; margin-bottom: 24px;">
+          Are you organizing a conference, festival, or meetup? Submit your proposal for curation on EventSphere.
+        </p>
+
+        <form id="hostEventForm">
+          <div class="form-group">
+            <label class="form-label" for="hostTitle">Event Title <span class="req">*</span></label>
+            <input type="text" id="hostTitle" class="form-control" style="padding-left: 16px;" placeholder="e.g. AI DevCon 2027" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="hostCategory">Category <span class="req">*</span></label>
+              <select id="hostCategory" class="form-control form-select" style="padding-left: 16px;" required>
+                <option value="Technology">Technology</option>
+                <option value="Music">Music</option>
+                <option value="Sports">Sports</option>
+                <option value="Education">Education</option>
+                <option value="Business">Business</option>
+                <option value="Arts & Culture">Arts &amp; Culture</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="hostExpectedAttendees">Expected Attendees</label>
+              <input type="number" id="hostExpectedAttendees" class="form-control" style="padding-left: 16px;" placeholder="e.g. 500" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="hostOrganizer">Organization / Name <span class="req">*</span></label>
+              <input type="text" id="hostOrganizer" class="form-control" style="padding-left: 16px;" placeholder="e.g. Tech Community India" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="hostEmail">Contact Email <span class="req">*</span></label>
+              <input type="email" id="hostEmail" class="form-control" style="padding-left: 16px;" placeholder="organizer@domain.com" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="hostDescription">Short Summary</label>
+            <textarea id="hostDescription" class="form-control" rows="3" placeholder="Describe the event format, venue city, and target audience..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; height: 50px; margin-top: 10px;">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Submit Proposal for Curation</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Floating Back to Top Button -->
+  <button class="back-to-top-btn" id="backToTopBtn" aria-label="Scroll back to top" title="Back to Top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- ======================================================================
+       JAVASCRIPT MODULES
+       ====================================================================== -->
+  <!-- 1. Rich Sample Events Database -->
+  <script src="js/events-data.js"></script>
+
+  <!-- 2. Dark/Light Theme Controller -->
+  <script src="js/theme.js"></script>
+
+  <!-- 3. Event Registration, Validation & Ticket Pass System -->
+  <script src="js/registration.js"></script>
+
+  <!-- 4. Main App Controller (Filtering, Search, Modals, Countdown, Nav) -->
+  <script src="js/app.js"></script>
+</body>
+</html>
