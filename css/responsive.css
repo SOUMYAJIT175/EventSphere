@@ -49,9 +49,9 @@
     top: var(--navbar-height);
     left: 0;
     width: 100%;
-    background: var(--bg-surface);
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: var(--shadow-lg);
+    background: #0b1124;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.25);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
     flex-direction: column;
     align-items: flex-start;
     padding: 24px 30px;
@@ -72,6 +72,12 @@
     font-size: 1.05rem;
     width: 100%;
     padding: 8px 0;
+    color: #e2e8f0;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: #c084fc;
   }
 
   .nav-link::after {
@@ -82,10 +88,10 @@
     display: none;
   }
 
-  /* Hero Section */
+  /* Hero Section: Stack text and visual vertically */
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 48px;
     text-align: center;
   }
 
@@ -108,9 +114,14 @@
   }
 
   .hero-visual {
-    order: -1;
-    max-width: 440px;
+    order: 2; /* Text on top, visual stacked cleanly below */
+    max-width: 500px;
     margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-visual-card {
+    height: 420px;
   }
 
   /* Countdown Banner */
@@ -191,6 +202,25 @@
    3. Smartphones / Mobile Devices (max-width: 767px)
    -------------------------------------------------------------------------- */
 @media (max-width: 767px) {
+  /* Brand Logo & Navbar Mobile Styling */
+  .brand-logo {
+    gap: 8px;
+  }
+
+  .logo-symbol {
+    width: 32px;
+    height: 32px;
+  }
+
+  .logo-icon-wrap {
+    width: 32px;
+    height: 32px;
+  }
+
+  .logo-brand-text {
+    font-size: 1.35rem;
+  }
+
   .section-title {
     font-size: 2rem;
   }
@@ -216,6 +246,44 @@
 
   .hero-cta-group .btn {
     width: 100%;
+  }
+
+  /* Hero Visual Card on Mobile */
+  .hero-visual-card {
+    height: 380px;
+    border-radius: var(--radius-lg);
+  }
+
+  .hero-visual-card-wrap {
+    max-width: 100%;
+    padding: 0 4px;
+  }
+
+  .hero-floating-badge {
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+  }
+
+  .badge-top-right {
+    top: -14px;
+    right: 4px;
+  }
+
+  .badge-bottom-left {
+    bottom: -16px;
+    left: 4px;
+  }
+
+  .badge-qr-pass {
+    display: none;
+  }
+
+  .hero-card-headline {
+    font-size: 1.15rem;
+  }
+
+  .hero-card-bottom-info {
+    padding: 18px 16px;
   }
 
   /* Spotlight 1-col on mobile */
@@ -404,8 +472,40 @@
    4. Small Mobiles (max-width: 480px)
    -------------------------------------------------------------------------- */
 @media (max-width: 480px) {
+  .logo-brand-text {
+    font-size: 1.25rem;
+  }
+
   .hero-title {
     font-size: 2rem;
+  }
+
+  .hero-visual-card {
+    height: 320px;
+  }
+
+  .badge-top-right {
+    top: -10px;
+    right: 0;
+  }
+
+  .badge-bottom-left {
+    bottom: -12px;
+    left: 0;
+  }
+
+  .badge-icon-circle {
+    width: 32px;
+    height: 32px;
+    font-size: 0.88rem;
+  }
+
+  .badge-text-col strong {
+    font-size: 0.78rem;
+  }
+
+  .badge-text-col span {
+    font-size: 0.65rem;
   }
 
   .countdown-card {

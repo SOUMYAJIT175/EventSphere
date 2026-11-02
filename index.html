@@ -40,7 +40,30 @@
     <div class="container nav-container">
       <!-- Brand Logo -->
       <a href="#home" class="brand-logo" aria-label="EventSphere Home">
-        <img src="images/logo.svg" alt="EventSphere Logo" />
+        <span class="logo-icon-wrap" aria-hidden="true">
+          <svg class="logo-symbol" viewBox="0 0 40 40" width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="navLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#A855F7"/>
+                <stop offset="50%" stop-color="#8B5CF6"/>
+                <stop offset="100%" stop-color="#EC4899"/>
+              </linearGradient>
+              <linearGradient id="navOrbitGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#F97316"/>
+                <stop offset="100%" stop-color="#A855F7"/>
+              </linearGradient>
+            </defs>
+            <!-- Planet with Orbit Ring -->
+            <circle cx="20" cy="20" r="17" stroke="url(#navLogoGrad)" stroke-width="2.5" fill="rgba(124, 58, 237, 0.22)"/>
+            <ellipse cx="20" cy="20" rx="18" ry="7.5" stroke="url(#navOrbitGrad)" stroke-width="2" transform="rotate(-28 20 20)"/>
+            <circle cx="20" cy="20" r="6.5" fill="url(#navLogoGrad)"/>
+            <circle cx="26" cy="14" r="2.5" fill="#F97316"/>
+          </svg>
+        </span>
+        <span class="logo-brand-text">
+          <span class="logo-text-event">Event</span><span class="logo-text-sphere">Sphere</span>
+          <span class="logo-dot"></span>
+        </span>
       </a>
 
       <!-- Desktop & Mobile Navigation Links -->
@@ -139,10 +162,104 @@
             </div>
           </div>
 
-          <!-- Right Column: Visual Showcase Mockup -->
+          <!-- Right Column: Visual Showcase with Photo, Lighting & Floating Badges -->
           <div class="hero-visual">
-            <div class="hero-graphic-wrap">
-              <img src="images/hero-illustration.svg" alt="EventSphere interactive experience illustration" />
+            <!-- Ambient Purple & Violet Glowing Backlights -->
+            <div class="hero-glow-backdrop" aria-hidden="true"></div>
+            <div class="hero-glow-orb-secondary" aria-hidden="true"></div>
+
+            <div class="hero-visual-card-wrap">
+              <!-- Main Visual Card Frame -->
+              <div class="hero-visual-card">
+                <!-- High Quality Event Photo (Live concert / crowd celebration with vibrant purple & violet lighting) -->
+                <img 
+                  src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80" 
+                  alt="Live concert crowd celebrating with vibrant violet stage lighting"
+                  class="hero-main-photo"
+                  id="heroMainPhoto"
+                  loading="eager"
+                  onerror="this.style.display='none'; document.getElementById('heroFallbackDesign').style.display='flex';"
+                />
+
+                <!-- CSS-Based Fallback Design (Active only if external image cannot be loaded) -->
+                <div class="hero-css-fallback" id="heroFallbackDesign" aria-hidden="true">
+                  <div class="fallback-glow-spot"></div>
+                  <div class="fallback-beam beam-left"></div>
+                  <div class="fallback-beam beam-center"></div>
+                  <div class="fallback-beam beam-right"></div>
+                  <div class="fallback-crowd-silhouette"></div>
+                  <div class="fallback-text-wrap">
+                    <span class="fallback-pill"><i class="fa-solid fa-sparkles"></i> Live Stage Arena</span>
+                    <h4>EventSphere Global Experience</h4>
+                    <p>Live Concerts &bull; Tech Summits &bull; Festivals</p>
+                  </div>
+                </div>
+
+                <!-- Gradient Lighting Vignette & Violet Tint Overlay -->
+                <div class="hero-card-lighting-overlay"></div>
+
+                <!-- Card Bottom Information Strip -->
+                <div class="hero-card-bottom-info">
+                  <div class="hero-card-cat-pill">
+                    <span class="live-dot-pulse"></span>
+                    <span>FEATURED LIVE GATHERING</span>
+                  </div>
+                  <h3 class="hero-card-headline">Neon Horizon Music &amp; Tech Arena</h3>
+                  <div class="hero-card-location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>National Convention Arena &bull; Mumbai</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating Decorative Element 1: Live Attendees Badge (Top-Right) -->
+              <div class="hero-floating-badge badge-top-right">
+                <div class="badge-icon-circle green-pulse">
+                  <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="badge-text-col">
+                  <strong>120k+ Attendees</strong>
+                  <span>Active Worldwide</span>
+                </div>
+              </div>
+
+              <!-- Floating Decorative Element 2: Star Rating & Avatars (Bottom-Left) -->
+              <div class="hero-floating-badge badge-bottom-left">
+                <div class="badge-avatar-stack">
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Attendee" onerror="this.style.display='none'" />
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Attendee" onerror="this.style.display='none'" />
+                  <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" alt="Attendee" onerror="this.style.display='none'" />
+                </div>
+                <div class="badge-text-col">
+                  <div class="badge-stars">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                  <span>4.9/5 Rating (12k+ reviews)</span>
+                </div>
+              </div>
+
+              <!-- Floating Decorative Element 3: Instant Digital QR Pass (Floating Bottom-Right Edge) -->
+              <div class="hero-floating-badge badge-qr-pass">
+                <div class="badge-icon-circle purple-glow">
+                  <i class="fa-solid fa-qrcode"></i>
+                </div>
+                <div class="badge-text-col">
+                  <strong>Instant QR Pass</strong>
+                  <span>1-Click Admission</span>
+                </div>
+              </div>
+
+              <!-- Decorative Floating Sparkles -->
+              <div class="hero-sparkle sparkle-1" aria-hidden="true">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="hero-sparkle sparkle-2" aria-hidden="true">
+                <i class="fa-solid fa-sparkle"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -879,7 +996,19 @@
         <!-- Brand Info -->
         <div class="footer-brand">
           <a href="#home" class="brand-logo" aria-label="EventSphere Home">
-            <img src="images/logo.svg" alt="EventSphere Logo" />
+            <span class="logo-icon-wrap" aria-hidden="true">
+              <svg class="logo-symbol" viewBox="0 0 40 40" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Planet with Orbit Ring -->
+                <circle cx="20" cy="20" r="17" stroke="url(#navLogoGrad)" stroke-width="2.5" fill="rgba(124, 58, 237, 0.22)"/>
+                <ellipse cx="20" cy="20" rx="18" ry="7.5" stroke="url(#navOrbitGrad)" stroke-width="2" transform="rotate(-28 20 20)"/>
+                <circle cx="20" cy="20" r="6.5" fill="url(#navLogoGrad)"/>
+                <circle cx="26" cy="14" r="2.5" fill="#F97316"/>
+              </svg>
+            </span>
+            <span class="logo-brand-text">
+              <span class="logo-text-event">Event</span><span class="logo-text-sphere">Sphere</span>
+              <span class="logo-dot"></span>
+            </span>
           </a>
           <p>
             EventSphere is a state-of-the-art event management and ticketing platform developed as a college web designing project. Experience modern frontend craftsmanship.
