@@ -1,6 +1,7 @@
 /**
  * EventSphere - Theme Manager (Dark & Light Mode)
- * Handles theme toggling, LocalStorage persistence, and system preference detection.
+ * Handles modern pill-shaped toggle, LocalStorage persistence,
+ * smooth sliding transitions, and system preference detection.
  */
 
 (function () {
@@ -15,7 +16,7 @@
     if (savedTheme === 'light' || savedTheme === 'dark') {
       return savedTheme;
     }
-    // Default to 'dark' for modern navy aesthetic as requested, or check system
+    // Default to 'dark' for the signature dark emerald-green aesthetic
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
       return 'light';
     }
@@ -38,30 +39,43 @@
     updateToggleButtons(theme);
   }
 
-  // Update icons and ARIA attributes on all theme toggle buttons
+  // Update icons and state on all theme toggle controls
   function updateToggleButtons(theme) {
-    const toggleButtons = document.querySelectorAll('.theme-toggle-btn');
-    toggleButtons.forEach(btn => {
-      const icon = btn.querySelector('i');
-      const text = btn.querySelector('.theme-text');
+    // 1. Modern pill toggles
+    const pillToggles = document.querySelectorAll('.theme-toggle-pill, .theme-toggle-btn');
+    pillToggles.forEach(toggle => {
       if (theme === 'light') {
-        if (icon) {
-          icon.className = 'fa-solid fa-moon';
+        toggle.classList.add('is-light');
+        toggle.classList.remove('is-dark');
+        toggle.setAttribute('aria-label', 'Switch to Dark Mode');
+        toggle.setAttribute('title', 'Switch to Dark Mode');
+        toggle.setAttribute('aria-checked', 'false');
+
+        // Update thumb icon if present
+        const thumbIcon = toggle.querySelector('.thumb-icon');
+        if (thumbIcon) {
+          thumbIcon.className = 'fa-solid fa-sun thumb-icon';
         }
+        const text = toggle.querySelector('.theme-text');
         if (text) {
           text.textContent = 'Dark Mode';
         }
-        btn.setAttribute('aria-label', 'Switch to Dark Mode');
-        btn.setAttribute('title', 'Switch to Dark Mode');
       } else {
-        if (icon) {
-          icon.className = 'fa-solid fa-sun';
+        toggle.classList.add('is-dark');
+        toggle.classList.remove('is-light');
+        toggle.setAttribute('aria-label', 'Switch to Light Mode');
+        toggle.setAttribute('title', 'Switch to Light Mode');
+        toggle.setAttribute('aria-checked', 'true');
+
+        // Update thumb icon if present
+        const thumbIcon = toggle.querySelector('.thumb-icon');
+        if (thumbIcon) {
+          thumbIcon.className = 'fa-solid fa-moon thumb-icon';
         }
+        const text = toggle.querySelector('.theme-text');
         if (text) {
           text.textContent = 'Light Mode';
         }
-        btn.setAttribute('aria-label', 'Switch to Light Mode');
-        btn.setAttribute('title', 'Switch to Light Mode');
       }
     });
   }
@@ -75,9 +89,9 @@
     // Optional toast notification
     if (window.EventSphere && window.EventSphere.showToast) {
       window.EventSphere.showToast(
-        `Switched to ${nextTheme === 'light' ? 'Light ☀️' : 'Dark 🌙'} mode`,
+        `Switched to ${nextTheme === 'light' ? 'Light Theme ☀️' : 'Dark Theme 🌙'}`,
         'info',
-        2000
+        2200
       );
     }
   }
@@ -89,7 +103,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     updateToggleButtons(initialTheme);
 
-    const toggleButtons = document.querySelectorAll('.theme-toggle-btn');
+    const toggleButtons = document.querySelectorAll('.theme-toggle-pill, .theme-toggle-btn');
     toggleButtons.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -107,7 +121,7 @@
     }
   });
 
-  // Expose to window for external control if needed
+  // Expose to window for external control
   window.EventSphereTheme = {
     get: () => htmlElement.getAttribute('data-theme') || 'dark',
     toggle: toggleTheme,

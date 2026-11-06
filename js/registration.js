@@ -73,6 +73,23 @@
     return emailRegex.test(email.trim());
   }
 
+  // Check if an event is completed
+  function checkEventCompleted(evt) {
+    if (!evt) return false;
+    if (evt.endDate) {
+      const end = new Date(evt.endDate).getTime();
+      if (!isNaN(end)) return Date.now() >= end;
+    }
+    const start = new Date(evt.date);
+    if (isNaN(start.getTime())) return false;
+    const dateStr = typeof evt.date === 'string' ? evt.date.split('T')[0] : '';
+    if (dateStr) {
+      const endOfDay = new Date(`${dateStr}T23:59:59+05:30`).getTime();
+      if (!isNaN(endOfDay)) return Date.now() >= endOfDay;
+    }
+    return Date.now() >= start.getTime();
+  }
+
   // Populate event dropdown in form
   function populateEventDropdown(selectedEventId = '') {
     const eventSelect = document.getElementById('regEventSelect');
@@ -85,17 +102,26 @@
       sampleEvents.forEach(evt => {
         const option = document.createElement('option');
         option.value = evt.id;
-        option.textContent = `${evt.title} (${evt.category} • ${evt.price})`;
-        if (selectedEventId && evt.id === selectedEventId) {
+        const isCompleted = checkEventCompleted(evt);
+        if (isCompleted) {
+          option.textContent = `[Concluded] ${evt.title} (${evt.category})`;
+          option.disabled = true;
+        } else {
+          option.textContent = `${evt.title} (${evt.category} • ${evt.price})`;
+        }
+        if (selectedEventId && evt.id === selectedEventId && !isCompleted) {
           option.selected = true;
         }
         eventSelect.appendChild(option);
       });
     }
 
-    // If an ID was given, set it
+    // If an ID was given, set it if not completed
     if (selectedEventId) {
-      eventSelect.value = selectedEventId;
+      const targetEvt = (typeof sampleEvents !== 'undefined') ? sampleEvents.find(e => e.id === selectedEventId) : null;
+      if (!targetEvt || !checkEventCompleted(targetEvt)) {
+        eventSelect.value = selectedEventId;
+      }
     }
   }
 
@@ -405,6 +431,15 @@
 
   // Pre-select an event and scroll smoothly to the registration form
   function selectEventForRegistration(eventId) {
+    if (typeof sampleEvents !== 'undefined') {
+      const targetEvt = sampleEvents.find(e => e.id === eventId);
+      if (targetEvt && checkEventCompleted(targetEvt)) {
+        if (window.EventSphere && window.EventSphere.showToast) {
+          window.EventSphere.showToast('Registration is closed for completed events.', 'warning');
+        }
+        return;
+      }
+    }
     populateEventDropdown(eventId);
     const regSection = document.getElementById('register');
     if (regSection) {
@@ -496,11 +531,11 @@
       <head>
         <title>Ticket Pass - ${ticket.eventTitle}</title>
         <style>
-          body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; color: #1e293b; background: #f8fafc; }
-          .pass-box { border: 2px dashed #6366f1; border-radius: 16px; padding: 30px; background: #fff; max-width: 550px; margin: 0 auto; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
-          .brand { font-size: 24px; font-weight: 800; color: #4f46e5; margin-bottom: 8px; }
-          .tag { display: inline-block; padding: 4px 12px; background: #e0e7ff; color: #4338ca; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 12px; }
-          h2 { margin: 8px 0 16px; color: #0f172a; font-size: 20px; }
+          body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; color: #0E1712; background: #F8FAFC; }
+          .pass-box { border: 2px dashed #10B981; border-radius: 16px; padding: 30px; background: #fff; max-width: 550px; margin: 0 auto; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+          .brand { font-size: 24px; font-weight: 800; color: #047857; margin-bottom: 8px; }
+          .tag { display: inline-block; padding: 4px 12px; background: rgba(16, 185, 129, 0.15); color: #047857; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 12px; }
+          h2 { margin: 8px 0 16px; color: #0A100D; font-size: 20px; }
           .info-row { margin: 8px 0; font-size: 14px; }
           .id-box { margin-top: 20px; padding: 12px; background: #f1f5f9; border-radius: 8px; font-family: monospace; font-size: 16px; font-weight: bold; text-align: center; }
           .footer-note { font-size: 12px; color: #64748b; margin-top: 24px; text-align: center; }

@@ -1,7 +1,7 @@
 /**
  * EventSphere - Core Application Controller
  * Manages event filtering, searching, sorting, modals, live countdown,
- * mobile navigation, toast messages, and interactive features.
+ * mobile navigation, toast messages, scroll reveals, and interactive orbital ecosystem.
  */
 
 (function () {
@@ -13,6 +13,7 @@
   let currentSort = 'date-asc';
   let viewMode = 'grid'; // 'grid' | 'list'
   let bookmarks = [];
+  let scrollObserver = null;
 
   // Bookmarks Storage Key
   const BOOKMARKS_KEY = 'eventsphere_bookmarked_ids';
@@ -110,6 +111,11 @@
     // 3. Sorting
     filtered.sort((a, b) => {
       if (currentSort === 'date-asc') {
+        const compA = isEventCompleted(a);
+        const compB = isEventCompleted(b);
+        if (compA !== compB) {
+          return compA ? 1 : -1; // Upcoming events first, completed events at the end
+        }
         return new Date(a.date) - new Date(b.date);
       } else if (currentSort === 'date-desc') {
         return new Date(b.date) - new Date(a.date);
@@ -128,22 +134,201 @@
     return filtered;
   }
 
+  // Event Time & Completion Calculation Helpers
+  function getEventCompletionTime(evt) {
+    if (!evt) return 0;
+    if (evt.endDate) {
+      const end = new Date(evt.endDate).getTime();
+      if (!isNaN(end)) return end;
+    }
+    const start = new Date(evt.date);
+    if (isNaN(start.getTime())) return 0;
+    const dateStr = typeof evt.date === 'string' ? evt.date.split('T')[0] : '';
+    if (dateStr) {
+      const endOfDay = new Date(`${dateStr}T23:59:59+05:30`).getTime();
+      if (!isNaN(endOfDay)) return endOfDay;
+    }
+    return start.getTime();
+  }
+
+  function isEventCompleted(evt) {
+    if (!evt) return false;
+    return Date.now() >= getEventCompletionTime(evt);
+  }
+
+  function isEventLive(evt) {
+    if (!evt) return false;
+    const start = new Date(evt.date).getTime();
+    return Date.now() >= start && !isEventCompleted(evt);
+  }
+
+  // Calculate precise countdown remaining
+  function getTimeRemaining(evt) {
+    if (!evt || !evt.date) {
+      return { status: 'invalid', days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
+    const now = Date.now();
+    const start = new Date(evt.date).getTime();
+    if (isNaN(start)) {
+      return { status: 'invalid', days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
+    const completion = getEventCompletionTime(evt);
+
+    if (now >= completion) {
+      return { status: 'completed', days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
+    if (now >= start) {
+      return { status: 'live', days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
+
+    const diff = Math.max(0, start - now);
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    return { status: 'upcoming', days, hours, minutes, seconds };
+  }
+
+  // Render individual card countdown component markup
+  function renderCardCountdown(evt) {
+    const t = getTimeRemaining(evt);
+
+    if (t.status === 'completed') {
+      return `
+        <div class="card-countdown-panel is-completed" data-countdown-id="${evt.id}">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>EVENT COMPLETED</span>
+        </div>
+      `;
+    }
+
+    if (t.status === 'live') {
+      return `
+        <div class="card-countdown-panel is-live" data-countdown-id="${evt.id}">
+          <span class="status-live-pulse"></span>
+          <span>EVENT HAPPENING NOW</span>
+        </div>
+      `;
+    }
+
+    const dd = String(t.days).padStart(2, '0');
+    const hh = String(t.hours).padStart(2, '0');
+    const mm = String(t.minutes).padStart(2, '0');
+    const ss = String(t.seconds).padStart(2, '0');
+
+    return `
+      <div class="card-countdown-panel" data-countdown-id="${evt.id}" role="timer" aria-label="Countdown to ${escapeHtml(evt.title)}">
+        <div class="card-countdown-header">
+          <i class="fa-regular fa-clock"></i>
+          <span>EVENT STARTS IN</span>
+        </div>
+        <div class="card-countdown-timer">
+          <div class="card-timer-box">
+            <span class="card-timer-num timer-days">${dd}</span>
+            <span class="card-timer-lbl">Days</span>
+          </div>
+          <span class="card-timer-colon">:</span>
+          <div class="card-timer-box">
+            <span class="card-timer-num timer-hours">${hh}</span>
+            <span class="card-timer-lbl">Hours</span>
+          </div>
+          <span class="card-timer-colon">:</span>
+          <div class="card-timer-box">
+            <span class="card-timer-num timer-mins">${mm}</span>
+            <span class="card-timer-lbl">Mins</span>
+          </div>
+          <span class="card-timer-colon">:</span>
+          <div class="card-timer-box">
+            <span class="card-timer-num timer-secs">${ss}</span>
+            <span class="card-timer-lbl">Secs</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Central interval for updating all visible card countdowns
+  let cardCountdownInterval = null;
+
+  function updateAllCardCountdowns() {
+    const panels = document.querySelectorAll('.card-countdown-panel[data-countdown-id]');
+    if (!panels || panels.length === 0) return;
+
+    panels.forEach(panel => {
+      const id = panel.getAttribute('data-countdown-id');
+      const evt = sampleEvents.find(e => e.id === id);
+      if (!evt) return;
+
+      const t = getTimeRemaining(evt);
+
+      if (t.status === 'completed') {
+        if (!panel.classList.contains('is-completed')) {
+          panel.className = 'card-countdown-panel is-completed';
+          panel.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>EVENT COMPLETED</span>`;
+          // Disable register button on parent card
+          const card = panel.closest('.event-card, .spotlight-card');
+          if (card) {
+            card.classList.add('is-event-concluded');
+            const regBtn = card.querySelector('.btn-register-card');
+            if (regBtn) {
+              regBtn.outerHTML = `<button class="btn btn-sm btn-completed" disabled aria-disabled="true" title="Registration closed for completed event"><i class="fa-solid fa-circle-check"></i> Concluded</button>`;
+            }
+            const seats = card.querySelector('.seats-indicator');
+            if (seats) {
+              seats.innerHTML = `<i class="fa-solid fa-user-group"></i> <span>Concluded</span>`;
+            }
+            const badge = card.querySelector('.spotlight-badge');
+            if (badge) {
+              badge.className = 'spotlight-badge completed-badge';
+              badge.innerHTML = '<i class="fa-solid fa-flag-checkered"></i> Concluded';
+            }
+          }
+        }
+        return;
+      }
+
+      if (t.status === 'live') {
+        if (!panel.classList.contains('is-live')) {
+          panel.className = 'card-countdown-panel is-live';
+          panel.innerHTML = `<span class="status-live-pulse"></span> <span>EVENT HAPPENING NOW</span>`;
+        }
+        return;
+      }
+
+      // Upcoming countdown tick
+      const daysEl = panel.querySelector('.timer-days');
+      const hoursEl = panel.querySelector('.timer-hours');
+      const minsEl = panel.querySelector('.timer-mins');
+      const secsEl = panel.querySelector('.timer-secs');
+
+      if (daysEl) daysEl.textContent = String(t.days).padStart(2, '0');
+      if (hoursEl) hoursEl.textContent = String(t.hours).padStart(2, '0');
+      if (minsEl) minsEl.textContent = String(t.minutes).padStart(2, '0');
+      if (secsEl) secsEl.textContent = String(t.seconds).padStart(2, '0');
+    });
+  }
+
+  function startCardCountdowns() {
+    if (cardCountdownInterval) {
+      clearInterval(cardCountdownInterval);
+      cardCountdownInterval = null;
+    }
+    updateAllCardCountdowns();
+    cardCountdownInterval = setInterval(updateAllCardCountdowns, 1000);
+  }
+
   // Render Event Cards
   function renderEvents() {
     const grid = document.getElementById('eventsGrid');
-    const countEl = document.getElementById('eventsCountBadge');
     if (!grid) return;
 
     const filtered = getFilteredEvents();
 
-    if (countEl) {
-      countEl.textContent = `${filtered.length} of ${sampleEvents.length} Events`;
-    }
-
     if (filtered.length === 0) {
       grid.className = 'events-grid-empty';
       grid.innerHTML = `
-        <div class="no-events-box">
+        <div class="no-events-box reveal-up is-revealed">
           <div class="no-events-icon"><i class="fa-solid fa-calendar-xmark"></i></div>
           <h3>No Matching Events Found</h3>
           <p>We couldn't find any events matching "<strong>${escapeHtml(searchQuery)}</strong>" in <strong>${escapeHtml(currentCategory)}</strong>.</p>
@@ -157,20 +342,26 @@
       if (resetBtn) {
         resetBtn.addEventListener('click', resetFilters);
       }
+      const remainingPanels = document.querySelectorAll('.card-countdown-panel[data-countdown-id]');
+      if (remainingPanels.length === 0 && cardCountdownInterval) {
+        clearInterval(cardCountdownInterval);
+        cardCountdownInterval = null;
+      }
       return;
     }
 
     grid.className = viewMode === 'grid' ? 'events-grid' : 'events-grid list-layout';
 
     let html = '';
-    filtered.forEach(evt => {
+    filtered.forEach((evt, idx) => {
       const isBookmarked = bookmarks.includes(evt.id);
+      const isCompleted = isEventCompleted(evt);
       const isFreeBadge = evt.isFree 
         ? '<span class="price-pill free">FREE</span>' 
         : `<span class="price-pill paid">${evt.price}</span>`;
 
       html += `
-        <article class="event-card ${evt.featured ? 'is-featured' : ''}" data-event-id="${evt.id}">
+        <article class="event-card ${evt.featured ? 'is-featured' : ''} ${isCompleted ? 'is-event-concluded' : ''} reveal-card" data-event-id="${evt.id}" style="--stagger-index: ${idx % 6};">
           <div class="card-media">
             <img 
               src="${evt.image}" 
@@ -184,6 +375,7 @@
                 ${evt.category}
               </span>
               ${evt.featured ? '<span class="featured-badge"><i class="fa-solid fa-star"></i> Featured</span>' : ''}
+              ${isCompleted ? '<span class="completed-badge"><i class="fa-solid fa-check"></i> Completed</span>' : ''}
             </div>
             <button 
               class="bookmark-btn ${isBookmarked ? 'active' : ''}" 
@@ -214,6 +406,9 @@
               <span>${escapeHtml(evt.venue)}, ${escapeHtml(evt.city)}</span>
             </div>
 
+            <!-- Individual Event Live Countdown Panel -->
+            ${renderCardCountdown(evt)}
+
             <p class="card-desc">
               ${escapeHtml(evt.shortDescription)}
             </p>
@@ -221,15 +416,16 @@
             <div class="card-footer">
               <div class="seats-indicator">
                 <i class="fa-solid fa-user-group"></i>
-                <span><strong class="highlight-seats">${evt.seatsLeft}</strong> spots left</span>
+                <span>${isCompleted ? 'Concluded' : `<strong class="highlight-seats">${evt.seatsLeft}</strong> spots left`}</span>
               </div>
               <div class="card-actions">
                 <button class="btn btn-sm btn-ghost btn-view-details" data-id="${evt.id}">
                   <i class="fa-regular fa-eye"></i> Details
                 </button>
-                <button class="btn btn-sm btn-primary btn-register-card" data-id="${evt.id}">
-                  <i class="fa-solid fa-ticket"></i> Register
-                </button>
+                ${isCompleted
+                  ? `<button class="btn btn-sm btn-completed" disabled aria-disabled="true" title="Registration closed for completed event"><i class="fa-solid fa-circle-check"></i> Concluded</button>`
+                  : `<button class="btn btn-sm btn-primary btn-register-card" data-id="${evt.id}"><i class="fa-solid fa-ticket"></i> Register</button>`
+                }
               </div>
             </div>
           </div>
@@ -239,6 +435,22 @@
 
     grid.innerHTML = html;
     attachCardEventListeners();
+    observeNewCards();
+    startCardCountdowns();
+  }
+
+  // Observe newly rendered event cards for scroll reveal
+  function observeNewCards() {
+    const cards = document.querySelectorAll('.reveal-card, .event-card');
+    if (scrollObserver) {
+      cards.forEach(card => {
+        if (!card.classList.contains('is-revealed')) {
+          scrollObserver.observe(card);
+        }
+      });
+    } else {
+      cards.forEach(card => card.classList.add('is-revealed'));
+    }
   }
 
   // Render Top 3 Featured Events in Spotlight Section
@@ -250,21 +462,25 @@
     if (featuredEvents.length === 0) return;
 
     let html = '';
-    featuredEvents.forEach(evt => {
+    featuredEvents.forEach((evt, idx) => {
+      const isCompleted = isEventCompleted(evt);
       html += `
-        <div class="spotlight-card">
+        <div class="spotlight-card reveal-up ${isCompleted ? 'is-event-concluded' : ''}" data-event-id="${evt.id}" style="--stagger-index: ${idx};">
           <div class="spotlight-img-wrap">
             <img src="${evt.image}" alt="${escapeHtml(evt.title)}" onerror="this.onerror=null; this.src='images/fallback-event.svg';" />
-            <span class="spotlight-badge"><i class="fa-solid fa-bolt"></i> Spotlight</span>
+            ${isCompleted 
+              ? '<span class="spotlight-badge completed-badge"><i class="fa-solid fa-flag-checkered"></i> Concluded</span>' 
+              : '<span class="spotlight-badge"><i class="fa-solid fa-bolt"></i> Spotlight</span>'}
           </div>
           <div class="spotlight-content">
             <span class="spotlight-category">${evt.category}</span>
             <h3 class="spotlight-title">${escapeHtml(evt.title)}</h3>
             <p class="spotlight-date"><i class="fa-regular fa-calendar"></i> ${evt.dateDisplay}</p>
             <p class="spotlight-venue"><i class="fa-solid fa-location-dot"></i> ${escapeHtml(evt.city)}</p>
+            ${renderCardCountdown(evt)}
             <div class="spotlight-bottom">
               <span class="spotlight-price">${evt.price}</span>
-              <button class="btn btn-sm btn-primary btn-view-details" data-id="${evt.id}">
+              <button class="btn btn-sm btn-primary btn-view-details" data-id="${evt.id}" aria-label="Explore ${escapeHtml(evt.title)}">
                 Explore Event <i class="fa-solid fa-arrow-right"></i>
               </button>
             </div>
@@ -276,16 +492,36 @@
 
     // Attach listener to spotlight buttons
     container.querySelectorAll('.btn-view-details').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         openEventDetailsModal(btn.getAttribute('data-id'));
       });
     });
+
+    // Card click opens modal
+    container.querySelectorAll('.spotlight-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (!e.target.closest('button')) {
+          const id = card.getAttribute('data-event-id');
+          if (id) openEventDetailsModal(id);
+        }
+      });
+    });
+
+    if (scrollObserver) {
+      container.querySelectorAll('.spotlight-card').forEach(c => scrollObserver.observe(c));
+    }
+
+    startCardCountdowns();
   }
 
-  // Card Event Listeners
+  // Card Event Listeners for Events Grid
   function attachCardEventListeners() {
+    const grid = document.getElementById('eventsGrid');
+    if (!grid) return;
+
     // Details Buttons
-    document.querySelectorAll('.btn-view-details').forEach(btn => {
+    grid.querySelectorAll('.btn-view-details').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const id = btn.getAttribute('data-id');
@@ -294,7 +530,7 @@
     });
 
     // Register Buttons
-    document.querySelectorAll('.btn-register-card').forEach(btn => {
+    grid.querySelectorAll('.btn-register-card').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const id = btn.getAttribute('data-id');
@@ -305,7 +541,7 @@
     });
 
     // Bookmark Buttons
-    document.querySelectorAll('.bookmark-btn').forEach(btn => {
+    grid.querySelectorAll('.bookmark-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const id = btn.getAttribute('data-id');
@@ -314,9 +550,8 @@
     });
 
     // Whole card click opens details
-    document.querySelectorAll('.event-card').forEach(card => {
+    grid.querySelectorAll('.event-card').forEach(card => {
       card.addEventListener('click', (e) => {
-        // Only if user didn't click inside a button
         if (!e.target.closest('button')) {
           const id = card.getAttribute('data-event-id');
           openEventDetailsModal(id);
@@ -340,8 +575,10 @@
     document.querySelectorAll('.category-filter-btn').forEach(btn => {
       if (btn.getAttribute('data-category') === 'all') {
         btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
       } else {
         btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
       }
     });
 
@@ -435,12 +672,22 @@
 
     // Register button from modal
     if (registerBtn) {
-      registerBtn.onclick = () => {
-        closeModal(modal);
-        if (window.EventSphereReg) {
-          window.EventSphereReg.selectEventForRegistration(evt.id);
-        }
-      };
+      if (isEventCompleted(evt)) {
+        registerBtn.disabled = true;
+        registerBtn.className = 'btn btn-secondary btn-completed';
+        registerBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Event Concluded';
+        registerBtn.onclick = null;
+      } else {
+        registerBtn.disabled = false;
+        registerBtn.className = 'btn btn-primary';
+        registerBtn.innerHTML = '<i class="fa-solid fa-ticket"></i> Register Now';
+        registerBtn.onclick = () => {
+          closeModal(modal);
+          if (window.EventSphereReg) {
+            window.EventSphereReg.selectEventForRegistration(evt.id);
+          }
+        };
+      }
     }
 
     // Share button
@@ -454,7 +701,6 @@
         if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
           navigator.share(shareData).catch(() => {});
         } else {
-          // Copy to clipboard
           navigator.clipboard.writeText(shareData.url).then(() => {
             showToast('Event link copied to clipboard! 📋', 'success');
           }).catch(() => {
@@ -476,50 +722,9 @@
     }
   }
 
-  // Live Countdown Timer for Premier Featured Event
+  // Start Card Countdowns for all individual events
   function initLiveCountdown() {
-    const premierEvent = sampleEvents[0]; // Global Tech Innovators Summit 2026
-    const targetDate = new Date(premierEvent.date).getTime();
-
-    const daysEl = document.getElementById('countDays');
-    const hoursEl = document.getElementById('countHours');
-    const minutesEl = document.getElementById('countMinutes');
-    const secondsEl = document.getElementById('countSeconds');
-    const countdownStatus = document.getElementById('countdownStatusText');
-    const countdownTitle = document.getElementById('countdownEventTitle');
-
-    if (countdownTitle) {
-      countdownTitle.textContent = premierEvent.title;
-    }
-
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
-
-      if (distance < 0) {
-        if (daysEl) daysEl.textContent = '00';
-        if (hoursEl) hoursEl.textContent = '00';
-        if (minutesEl) minutesEl.textContent = '00';
-        if (secondsEl) secondsEl.textContent = '00';
-        if (countdownStatus) {
-          countdownStatus.innerHTML = '<span class="status-live-pulse"></span> EVENT IS CURRENTLY LIVE!';
-        }
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
-      if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
-      if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
-      if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    startCardCountdowns();
   }
 
   // Sticky Navbar & Active Link Spy
@@ -530,9 +735,8 @@
     const mobileMenuBtn = document.getElementById('mobileMenuToggle');
     const navMenu = document.getElementById('primaryNavMenu');
 
-    // Sticky shadow & backdrop on scroll
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 40) {
+      if (window.scrollY > 30) {
         navbar.classList.add('is-scrolled');
       } else {
         navbar.classList.remove('is-scrolled');
@@ -540,7 +744,7 @@
 
       // Link Spy
       let currentSectionId = '';
-      const scrollPos = window.scrollY + 120;
+      const scrollPos = window.scrollY + 140;
 
       sections.forEach(sec => {
         const top = sec.offsetTop;
@@ -560,7 +764,7 @@
       // Back to Top button visibility
       const backToTopBtn = document.getElementById('backToTopBtn');
       if (backToTopBtn) {
-        if (window.scrollY > 500) {
+        if (window.scrollY > 450) {
           backToTopBtn.classList.add('visible');
         } else {
           backToTopBtn.classList.remove('visible');
@@ -576,7 +780,6 @@
         mobileMenuBtn.setAttribute('aria-expanded', isOpen);
       });
 
-      // Close mobile menu when clicking any nav link
       navMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
           navMenu.classList.remove('active');
@@ -585,7 +788,6 @@
         });
       });
 
-      // Close when clicking outside
       document.addEventListener('click', (e) => {
         if (navMenu.classList.contains('active') && 
             !navMenu.contains(e.target) && 
@@ -612,8 +814,12 @@
     const categoryBtns = document.querySelectorAll('.category-filter-btn');
     categoryBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        categoryBtns.forEach(b => b.classList.remove('active'));
+        categoryBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
         btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
         currentCategory = btn.getAttribute('data-category') || 'all';
         renderEvents();
       });
@@ -633,7 +839,7 @@
             clearSearchBtn.style.display = searchQuery ? 'inline-flex' : 'none';
           }
           renderEvents();
-        }, 250);
+        }, 220);
       });
     }
 
@@ -677,6 +883,126 @@
         renderEvents();
       });
     }
+  }
+
+  // Scroll Reveal Animations System via IntersectionObserver
+  function initScrollReveals() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Elements to reveal (including event cards)
+    const revealTargets = document.querySelectorAll(
+      '.reveal-up, .reveal-stagger, .reveal-card, .event-card, .section-header, .feature-box, .testimonial-card, .contact-info-card, .contact-form-card, .reg-benefits-card, .registration-form-card, .countdown-card, .spotlight-card, .about-stat-box'
+    );
+
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      revealTargets.forEach(el => el.classList.add('is-revealed'));
+      return;
+    }
+
+    scrollObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.05,
+      rootMargin: '0px 0px 50px 0px'
+    });
+
+    revealTargets.forEach(el => scrollObserver.observe(el));
+  }
+
+  // Animated Statistics Numbers (Rolls up to target when entering viewport)
+  function initStatCounters() {
+    const statElements = document.querySelectorAll('.stat-number[data-counter]');
+    if (statElements.length === 0) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const targetVal = parseFloat(el.getAttribute('data-counter')) || 0;
+          const suffix = el.getAttribute('data-suffix') || '';
+          const prefix = el.getAttribute('data-prefix') || '';
+          const decimals = parseInt(el.getAttribute('data-decimals'), 10) || 0;
+
+          if (prefersReducedMotion) {
+            el.innerHTML = `${prefix}${targetVal.toFixed(decimals)}<span>${suffix}</span>`;
+            obs.unobserve(el);
+            return;
+          }
+
+          const duration = 1400; // ms
+          const startTime = performance.now();
+
+          function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const currentVal = targetVal * eased;
+
+            el.innerHTML = `${prefix}${currentVal.toFixed(decimals)}<span>${suffix}</span>`;
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
+            } else {
+              el.innerHTML = `${prefix}${targetVal.toFixed(decimals)}<span>${suffix}</span>`;
+            }
+          }
+
+          requestAnimationFrame(updateCounter);
+          obs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    statElements.forEach(el => observer.observe(el));
+  }
+
+  // Interactive Orbital Ecosystem Badges in Hero Section
+  function initOrbitalInteractions() {
+    const orbitalBadges = document.querySelectorAll('.orbital-badge[data-category-target]');
+    orbitalBadges.forEach(badge => {
+      badge.addEventListener('click', (e) => {
+        const cat = badge.getAttribute('data-category-target');
+        if (!cat) return;
+
+        // If target is register
+        if (cat === 'register') {
+          const regSec = document.getElementById('register');
+          if (regSec) regSec.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+
+        // If target is community/testimonials
+        if (cat === 'community') {
+          const testSec = document.getElementById('testimonials');
+          if (testSec) testSec.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+
+        // Filter events
+        const catBtn = document.querySelector(`.category-filter-btn[data-category="${cat}"]`);
+        if (catBtn) {
+          catBtn.click();
+        } else {
+          currentCategory = cat;
+          renderEvents();
+        }
+
+        // Smooth scroll to events
+        const eventsSec = document.getElementById('events');
+        if (eventsSec) {
+          eventsSec.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
   }
 
   // Contact Form Validation & Submission
@@ -740,7 +1066,6 @@
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnText;
 
-        // Show confirmation modal or toast
         showToast('Thank you! Your message has been sent. We will respond within 24 hours.', 'success', 5000);
       }, 1000);
     });
@@ -828,7 +1153,7 @@
     });
   }
 
-  // General Modal Backdrop Click & ESC Key
+  // General Modal Dismissals
   function setupModalDismissals() {
     const modals = document.querySelectorAll('.es-modal');
     modals.forEach(m => {
@@ -887,6 +1212,7 @@
     loadBookmarks();
     setupNavigation();
     setupFilterAndSearchControls();
+    initScrollReveals();
     renderFeaturedSpotlight();
     renderEvents();
     initLiveCountdown();
@@ -895,6 +1221,8 @@
     setupNewsletter();
     setupModalDismissals();
     setupSmoothScroll();
+    initStatCounters();
+    initOrbitalInteractions();
   });
 
   // Public Interface

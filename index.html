@@ -44,20 +44,20 @@
           <svg class="logo-symbol" viewBox="0 0 40 40" width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="navLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#A855F7"/>
-                <stop offset="50%" stop-color="#8B5CF6"/>
-                <stop offset="100%" stop-color="#EC4899"/>
+                <stop offset="0%" stop-color="#34D399"/>
+                <stop offset="50%" stop-color="#10B981"/>
+                <stop offset="100%" stop-color="#047857"/>
               </linearGradient>
-              <linearGradient id="navOrbitGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#F97316"/>
-                <stop offset="100%" stop-color="#A855F7"/>
+              <linearGradient id="navOrbitGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#047857"/>
+                <stop offset="100%" stop-color="#34D399"/>
               </linearGradient>
             </defs>
             <!-- Planet with Orbit Ring -->
-            <circle cx="20" cy="20" r="17" stroke="url(#navLogoGrad)" stroke-width="2.5" fill="rgba(124, 58, 237, 0.22)"/>
+            <circle cx="20" cy="20" r="17" stroke="url(#navLogoGrad)" stroke-width="2.5" fill="rgba(16, 185, 129, 0.15)"/>
             <ellipse cx="20" cy="20" rx="18" ry="7.5" stroke="url(#navOrbitGrad)" stroke-width="2" transform="rotate(-28 20 20)"/>
             <circle cx="20" cy="20" r="6.5" fill="url(#navLogoGrad)"/>
-            <circle cx="26" cy="14" r="2.5" fill="#F97316"/>
+            <circle cx="26" cy="14" r="2.5" fill="#34D399"/>
           </svg>
         </span>
         <span class="logo-brand-text">
@@ -78,10 +78,15 @@
 
       <!-- Action Buttons & Theme Toggle -->
       <div class="nav-actions">
-        <!-- Dark/Light Theme Toggle -->
-        <button class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Theme">
-          <i class="fa-solid fa-sun"></i>
-          <span class="theme-text">Light Mode</span>
+        <!-- Dark/Light Theme Modern Pill Toggle -->
+        <button class="theme-toggle-pill is-dark" id="themeTogglePill" aria-label="Switch to Light Mode" title="Switch to Light Mode" role="switch" aria-checked="true">
+          <span class="theme-toggle-track">
+            <span class="theme-toggle-icon-slot slot-dark"><i class="fa-solid fa-moon"></i></span>
+            <span class="theme-toggle-icon-slot slot-light"><i class="fa-solid fa-sun"></i></span>
+            <span class="theme-toggle-thumb">
+              <i class="fa-solid fa-moon thumb-icon"></i>
+            </span>
+          </span>
         </button>
 
         <!-- My Tickets Trigger -->
@@ -142,184 +147,182 @@
             </div>
 
             <!-- Hero Live Statistics -->
-            <div class="hero-stats-row">
+            <div class="hero-stats-row reveal-up">
               <div class="stat-item">
-                <div class="stat-number">500<span>+</span></div>
+                <div class="stat-number" data-counter="500" data-suffix="+">500<span>+</span></div>
                 <div class="stat-label">Curated Events</div>
               </div>
               <div class="stat-item">
-                <div class="stat-number">120k<span>+</span></div>
+                <div class="stat-number" data-counter="120" data-suffix="k+">120k<span>+</span></div>
                 <div class="stat-label">Active Attendees</div>
               </div>
               <div class="stat-item">
-                <div class="stat-number">6<span>+</span></div>
+                <div class="stat-number" data-counter="6" data-suffix="+">6<span>+</span></div>
                 <div class="stat-label">Dynamic Categories</div>
               </div>
               <div class="stat-item">
-                <div class="stat-number">99.4<span>%</span></div>
+                <div class="stat-number" data-counter="99.4" data-suffix="%" data-decimals="1">99.4<span>%</span></div>
                 <div class="stat-label">Satisfaction Rate</div>
               </div>
             </div>
           </div>
 
-          <!-- Right Column: Visual Showcase with Photo, Lighting & Floating Badges -->
-          <div class="hero-visual">
-            <!-- Ambient Purple & Violet Glowing Backlights -->
-            <div class="hero-glow-backdrop" aria-hidden="true"></div>
-            <div class="hero-glow-orb-secondary" aria-hidden="true"></div>
+          <!-- Right Column: Animated Interactive Orbital Event Ecosystem -->
+          <div class="hero-orbital-ecosystem" id="heroOrbitalEcosystem" aria-label="Interactive Orbital Event Ecosystem">
+            <!-- Ambient Emerald & Mint Radial Glow Aura -->
+            <div class="orbital-glow-backdrop" aria-hidden="true"></div>
+            <div class="orbital-glow-orb-secondary" aria-hidden="true"></div>
 
-            <div class="hero-visual-card-wrap">
-              <!-- Main Visual Card Frame -->
-              <div class="hero-visual-card">
-                <!-- High Quality Event Photo (Live concert / crowd celebration with vibrant purple & violet lighting) -->
-                <img 
-                  src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80" 
-                  alt="Live concert crowd celebrating with vibrant violet stage lighting"
-                  class="hero-main-photo"
-                  id="heroMainPhoto"
-                  loading="eager"
-                  onerror="this.style.display='none'; document.getElementById('heroFallbackDesign').style.display='flex';"
-                />
-
-                <!-- CSS-Based Fallback Design (Active only if external image cannot be loaded) -->
-                <div class="hero-css-fallback" id="heroFallbackDesign" aria-hidden="true">
-                  <div class="fallback-glow-spot"></div>
-                  <div class="fallback-beam beam-left"></div>
-                  <div class="fallback-beam beam-center"></div>
-                  <div class="fallback-beam beam-right"></div>
-                  <div class="fallback-crowd-silhouette"></div>
-                  <div class="fallback-text-wrap">
-                    <span class="fallback-pill"><i class="fa-solid fa-sparkles"></i> Live Stage Arena</span>
-                    <h4>EventSphere Global Experience</h4>
-                    <p>Live Concerts &bull; Tech Summits &bull; Festivals</p>
-                  </div>
+            <div class="orbital-stage-wrap">
+              <!-- Concentric Animated Orbital Rings (Pure CSS with orbiting particle lights) -->
+              <div class="orbital-rings-layer" aria-hidden="true">
+                <div class="orbital-ring ring-outer">
+                  <div class="orbital-particle particle-outer-1"></div>
+                  <div class="orbital-particle particle-outer-2"></div>
                 </div>
+                <div class="orbital-ring ring-middle">
+                  <div class="orbital-particle particle-middle-1"></div>
+                  <div class="orbital-particle particle-middle-2"></div>
+                </div>
+                <div class="orbital-ring ring-inner">
+                  <div class="orbital-particle particle-inner-1"></div>
+                </div>
+              </div>
 
-                <!-- Gradient Lighting Vignette & Violet Tint Overlay -->
-                <div class="hero-card-lighting-overlay"></div>
-
-                <!-- Card Bottom Information Strip -->
-                <div class="hero-card-bottom-info">
-                  <div class="hero-card-cat-pill">
-                    <span class="live-dot-pulse"></span>
-                    <span>FEATURED LIVE GATHERING</span>
+              <!-- Center Hub: Glowing Holographic Event Ticket / Stage Pass -->
+              <div class="orbital-center-hub" role="region" aria-label="Featured Digital Event Pass">
+                <div class="hub-ticket-glass">
+                  <div class="hub-ticket-glow"></div>
+                  <div class="hub-ticket-top">
+                    <span class="hub-pill"><span class="live-beacon"></span> LIVE STAGE</span>
+                    <span class="hub-code">#ESP-2026</span>
                   </div>
-                  <h3 class="hero-card-headline">Neon Horizon Music &amp; Tech Arena</h3>
-                  <div class="hero-card-location">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span>National Convention Arena &bull; Mumbai</span>
+                  <div class="hub-ticket-body">
+                    <div class="hub-icon-wrap">
+                      <i class="fa-solid fa-ticket-simple"></i>
+                    </div>
+                    <div class="hub-meta">
+                      <span class="hub-eyebrow">DIGITAL ACCESS PASS</span>
+                      <h3 class="hub-title">Your Next Experience</h3>
+                      <p class="hub-desc">Next-Gen Live Discovery</p>
+                    </div>
+                  </div>
+                  <div class="hub-ticket-divider">
+                    <span class="notch notch-left"></span>
+                    <span class="dash-line"></span>
+                    <span class="notch notch-right"></span>
+                  </div>
+                  <div class="hub-ticket-footer">
+                    <div class="hub-barcode-wrap" aria-hidden="true">
+                      <span class="barcode-line b1"></span>
+                      <span class="barcode-line b2"></span>
+                      <span class="barcode-line b3"></span>
+                      <span class="barcode-line b4"></span>
+                      <span class="barcode-line b5"></span>
+                      <span class="barcode-line b6"></span>
+                      <span class="barcode-line b7"></span>
+                    </div>
+                    <a href="#events" class="hub-cta-btn" title="Explore All Events">
+                      <span>Explore</span>
+                      <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                   </div>
                 </div>
               </div>
 
-              <!-- Floating Decorative Element 1: Live Attendees Badge (Top-Right) -->
-              <div class="hero-floating-badge badge-top-right">
-                <div class="badge-icon-circle green-pulse">
+              <!-- Floating Glassmorphism Information Badges (8 Badges) -->
+              <!-- Badge 1: Technology Conferences (Top-Left) -->
+              <div class="orbital-badge badge-pos-top-left badge-float-1" data-category-target="Technology" role="button" tabindex="0" title="Click to filter Technology events">
+                <div class="badge-icon icon-tech">
+                  <i class="fa-solid fa-microchip"></i>
+                </div>
+                <div class="badge-content">
+                  <strong class="badge-heading">Tech Summits</strong>
+                  <span class="badge-sub">AI &bull; Cloud &bull; Web3</span>
+                </div>
+              </div>
+
+              <!-- Badge 2: Live Music Festivals (Top-Right) -->
+              <div class="orbital-badge badge-pos-top-right badge-float-2" data-category-target="Music" role="button" tabindex="0" title="Click to filter Music events">
+                <div class="badge-icon icon-music">
+                  <i class="fa-solid fa-music"></i>
+                </div>
+                <div class="badge-content">
+                  <strong class="badge-heading">Live Music</strong>
+                  <span class="badge-sub">Festivals &bull; Concerts</span>
+                </div>
+              </div>
+
+              <!-- Badge 3: Sports Championships (Mid-Right) -->
+              <div class="orbital-badge badge-pos-mid-right badge-float-3" data-category-target="Sports" role="button" tabindex="0" title="Click to filter Sports events">
+                <div class="badge-icon icon-sports">
+                  <i class="fa-solid fa-trophy"></i>
+                </div>
+                <div class="badge-content">
+                  <strong class="badge-heading">Sports Arenas</strong>
+                  <span class="badge-sub">Marathons &bull; Esports</span>
+                </div>
+              </div>
+
+              <!-- Badge 4: Creative Workshops (Bottom-Right) -->
+              <div class="orbital-badge badge-pos-bottom-right badge-float-4" data-category-target="Arts & Culture" role="button" tabindex="0" title="Click to filter Arts & Culture events">
+                <div class="badge-icon icon-arts">
+                  <i class="fa-solid fa-palette"></i>
+                </div>
+                <div class="badge-content">
+                  <strong class="badge-heading">Creative Arts</strong>
+                  <span class="badge-sub">Design &bull; Exhibitions</span>
+                </div>
+              </div>
+
+              <!-- Badge 5: Business Networking (Bottom-Left) -->
+              <div class="orbital-badge badge-pos-bottom-left badge-float-1" data-category-target="Business" role="button" tabindex="0" title="Click to filter Business events">
+                <div class="badge-icon icon-business">
+                  <i class="fa-solid fa-briefcase"></i>
+                </div>
+                <div class="badge-content">
+                  <strong class="badge-heading">Business Hub</strong>
+                  <span class="badge-sub">Networking &bull; Startups</span>
+                </div>
+              </div>
+
+              <!-- Badge 6: Upcoming Events (Mid-Left) -->
+              <div class="orbital-badge badge-pos-mid-left badge-float-2" data-category-target="all" role="button" tabindex="0" title="Click to view all Upcoming events">
+                <div class="badge-icon icon-calendar">
+                  <i class="fa-solid fa-calendar-day"></i>
+                </div>
+                <div class="badge-content">
+                  <strong class="badge-heading">Upcoming Lineup</strong>
+                  <span class="badge-sub">500+ Curated Shows</span>
+                </div>
+              </div>
+
+              <!-- Badge 7: 120k+ Attendees (Top-Center) -->
+              <div class="orbital-badge badge-pos-top-center badge-float-3" data-category-target="community" role="button" tabindex="0" title="Click to view community reviews">
+                <div class="badge-icon icon-attendees">
                   <i class="fa-solid fa-users"></i>
                 </div>
-                <div class="badge-text-col">
-                  <strong>120k+ Attendees</strong>
-                  <span>Active Worldwide</span>
+                <div class="badge-content">
+                  <strong class="badge-heading">120k+ Attendees</strong>
+                  <span class="badge-sub">Active Global Audience</span>
                 </div>
               </div>
 
-              <!-- Floating Decorative Element 2: Star Rating & Avatars (Bottom-Left) -->
-              <div class="hero-floating-badge badge-bottom-left">
-                <div class="badge-avatar-stack">
-                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Attendee" onerror="this.style.display='none'" />
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Attendee" onerror="this.style.display='none'" />
-                  <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" alt="Attendee" onerror="this.style.display='none'" />
+              <!-- Badge 8: Instant Event Registration (Bottom-Center) -->
+              <div class="orbital-badge badge-pos-bottom-center badge-float-4" data-category-target="register" role="button" tabindex="0" title="Click to jump to Registration">
+                <div class="badge-icon icon-reg">
+                  <i class="fa-solid fa-bolt"></i>
                 </div>
-                <div class="badge-text-col">
-                  <div class="badge-stars">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                  </div>
-                  <span>4.9/5 Rating (12k+ reviews)</span>
+                <div class="badge-content">
+                  <strong class="badge-heading">Instant Booking</strong>
+                  <span class="badge-sub">Verified Digital Pass</span>
                 </div>
-              </div>
-
-              <!-- Floating Decorative Element 3: Instant Digital QR Pass (Floating Bottom-Right Edge) -->
-              <div class="hero-floating-badge badge-qr-pass">
-                <div class="badge-icon-circle purple-glow">
-                  <i class="fa-solid fa-qrcode"></i>
-                </div>
-                <div class="badge-text-col">
-                  <strong>Instant QR Pass</strong>
-                  <span>1-Click Admission</span>
-                </div>
-              </div>
-
-              <!-- Decorative Floating Sparkles -->
-              <div class="hero-sparkle sparkle-1" aria-hidden="true">
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <div class="hero-sparkle sparkle-2" aria-hidden="true">
-                <i class="fa-solid fa-sparkle"></i>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-
-
-    <!-- ====================================================================
-         FEATURED EVENT LIVE COUNTDOWN BANNER
-         ==================================================================== -->
-    <section class="countdown-banner-section" aria-label="Upcoming Featured Event Live Countdown">
-      <div class="container">
-        <div class="countdown-card">
-          <div class="countdown-inner">
-            <!-- Event Info -->
-            <div class="countdown-info-col">
-              <div class="countdown-status-pill" id="countdownStatusText">
-                <span class="status-live-pulse"></span>
-                <span>Live Countdown &bull; Premier Summit</span>
-              </div>
-              <h2 class="countdown-event-name" id="countdownEventTitle">
-                Global Tech Innovators Summit 2026
-              </h2>
-              <p class="text-muted" style="font-size: 0.9rem;">
-                <i class="fa-regular fa-clock"></i> Hurry! Early bird passes are running out fast.
-              </p>
-            </div>
-
-            <!-- Dynamic Countdown Display -->
-            <div class="countdown-timer-grid" role="timer" aria-live="polite">
-              <div class="timer-box">
-                <span class="timer-val" id="countDays">00</span>
-                <span class="timer-lbl">Days</span>
-              </div>
-              <div class="timer-box">
-                <span class="timer-val" id="countHours">00</span>
-                <span class="timer-lbl">Hours</span>
-              </div>
-              <div class="timer-box">
-                <span class="timer-val" id="countMinutes">00</span>
-                <span class="timer-lbl">Minutes</span>
-              </div>
-              <div class="timer-box">
-                <span class="timer-val" id="countSeconds">00</span>
-                <span class="timer-lbl">Seconds</span>
-              </div>
-            </div>
-
-            <!-- Quick Action Button -->
-            <div class="countdown-action-col">
-              <button class="btn btn-accent btn-lg" onclick="window.EventSphereReg.selectEventForRegistration('evt-tech-01')">
-                <i class="fa-solid fa-ticket"></i>
-                <span>Claim Your Pass</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
 
     <!-- ====================================================================
          FEATURED SPOTLIGHT SECTION
@@ -427,11 +430,6 @@
               <i class="fa-solid fa-palette"></i> Arts &amp; Culture
             </button>
           </div>
-        </div>
-
-        <!-- Results Counter & Status -->
-        <div class="events-results-header">
-          <span class="events-count-badge" id="eventsCountBadge">Loading events...</span>
         </div>
 
         <!-- Events Grid (Rendered dynamically by app.js) -->
@@ -630,7 +628,7 @@
                 <div class="terms-checkbox-wrap">
                   <input type="checkbox" id="regTerms" required />
                   <label for="regTerms">
-                    I agree to the <a href="#about" style="color: var(--primary-purple); text-decoration: underline;">Terms &amp; Conditions</a> and understand that duplicate registrations for the same event are restricted.
+                    I agree to the <a href="#about" style="color: var(--primary-emerald); text-decoration: underline;">Terms &amp; Conditions</a> and understand that duplicate registrations for the same event are restricted.
                   </label>
                 </div>
                 <div class="field-error-msg" id="regTermsError"></div>
@@ -999,10 +997,10 @@
             <span class="logo-icon-wrap" aria-hidden="true">
               <svg class="logo-symbol" viewBox="0 0 40 40" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <!-- Planet with Orbit Ring -->
-                <circle cx="20" cy="20" r="17" stroke="url(#navLogoGrad)" stroke-width="2.5" fill="rgba(124, 58, 237, 0.22)"/>
+                <circle cx="20" cy="20" r="17" stroke="url(#navLogoGrad)" stroke-width="2.5" fill="rgba(16, 185, 129, 0.15)"/>
                 <ellipse cx="20" cy="20" rx="18" ry="7.5" stroke="url(#navOrbitGrad)" stroke-width="2" transform="rotate(-28 20 20)"/>
                 <circle cx="20" cy="20" r="6.5" fill="url(#navLogoGrad)"/>
-                <circle cx="26" cy="14" r="2.5" fill="#F97316"/>
+                <circle cx="26" cy="14" r="2.5" fill="#34D399"/>
               </svg>
             </span>
             <span class="logo-brand-text">
@@ -1105,6 +1103,9 @@
           </div>
           <div class="quick-strip-item" id="modalVenue">
             <i class="fa-solid fa-location-dot"></i> Venue &amp; City
+          </div>
+          <div class="quick-strip-item" id="modalOrganizer">
+            <i class="fa-solid fa-building-user"></i> Organizer
           </div>
         </div>
 

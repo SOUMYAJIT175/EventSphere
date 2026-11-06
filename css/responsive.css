@@ -11,13 +11,8 @@
     font-size: 3rem;
   }
 
-  .countdown-inner {
-    grid-template-columns: 1fr 1.3fr auto;
-    gap: 20px;
-  }
-
   .events-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .features-grid {
@@ -49,9 +44,9 @@
     top: var(--navbar-height);
     left: 0;
     width: 100%;
-    background: #0b1124;
-    border-bottom: 1px solid rgba(139, 92, 246, 0.25);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    background: #0A100D;
+    border-bottom: 1px solid rgba(52, 211, 153, 0.25);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
     flex-direction: column;
     align-items: flex-start;
     padding: 24px 30px;
@@ -77,7 +72,7 @@
 
   .nav-link:hover,
   .nav-link.active {
-    color: #c084fc;
+    color: #34D399;
   }
 
   .nav-link::after {
@@ -113,31 +108,22 @@
     justify-content: center;
   }
 
-  .hero-visual {
-    order: 2; /* Text on top, visual stacked cleanly below */
-    max-width: 500px;
+  .hero-orbital-ecosystem {
+    order: 2; /* Text on top, ecosystem stacked cleanly below */
+    max-width: 520px;
     margin: 0 auto;
     width: 100%;
+    min-height: 480px;
   }
 
-  .hero-visual-card {
-    height: 420px;
+  .orbital-stage-wrap {
+    height: 480px;
+    max-width: 520px;
   }
 
-  /* Countdown Banner */
-  .countdown-inner {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 24px;
-  }
-
-  .countdown-status-pill {
-    justify-content: center;
-  }
-
-  .countdown-action-col {
-    text-align: center;
-  }
+  .ring-outer { width: 430px; height: 430px; }
+  .ring-middle { width: 320px; height: 320px; }
+  .ring-inner { width: 220px; height: 220px; }
 
   /* Spotlight Grid */
   .spotlight-grid {
@@ -248,43 +234,61 @@
     width: 100%;
   }
 
-  /* Hero Visual Card on Mobile */
-  .hero-visual-card {
-    height: 380px;
-    border-radius: var(--radius-lg);
-  }
-
-  .hero-visual-card-wrap {
+  /* Hero Orbital Ecosystem on Mobile */
+  .hero-orbital-ecosystem {
+    min-height: 440px;
     max-width: 100%;
-    padding: 0 4px;
+    overflow: visible;
   }
 
-  .hero-floating-badge {
-    padding: 8px 12px;
-    border-radius: var(--radius-md);
+  .orbital-stage-wrap {
+    height: 440px;
+    max-width: 100%;
   }
 
-  .badge-top-right {
-    top: -14px;
-    right: 4px;
+  .ring-outer { width: 340px; height: 340px; }
+  .ring-middle { width: 260px; height: 260px; }
+  .ring-inner { width: 180px; height: 180px; }
+
+  .orbital-center-hub {
+    width: 215px;
   }
 
-  .badge-bottom-left {
-    bottom: -16px;
-    left: 4px;
+  .hub-ticket-glass {
+    padding: 14px 16px;
   }
 
-  .badge-qr-pass {
-    display: none;
+  .hub-title {
+    font-size: 0.95rem;
   }
 
-  .hero-card-headline {
-    font-size: 1.15rem;
+  .orbital-badge {
+    padding: 6px 10px;
+    font-size: 0.75rem;
   }
 
-  .hero-card-bottom-info {
-    padding: 18px 16px;
+  .badge-icon {
+    width: 26px;
+    height: 26px;
+    font-size: 0.75rem;
   }
+
+  .badge-heading {
+    font-size: 0.75rem;
+  }
+
+  .badge-sub {
+    font-size: 0.62rem;
+  }
+
+  .badge-pos-top-left { top: 2%; left: 0%; }
+  .badge-pos-top-center { top: -6%; left: 30%; }
+  .badge-pos-top-right { top: 4%; right: 0%; }
+  .badge-pos-mid-left { top: 42%; left: -2%; }
+  .badge-pos-mid-right { top: 40%; right: -2%; }
+  .badge-pos-bottom-left { bottom: 4%; left: 0%; }
+  .badge-pos-bottom-center { bottom: -6%; left: 28%; }
+  .badge-pos-bottom-right { bottom: 4%; right: 0%; }
 
   /* Spotlight 1-col on mobile */
   .spotlight-grid {
@@ -480,48 +484,59 @@
     font-size: 2rem;
   }
 
-  .hero-visual-card {
-    height: 320px;
+  .hero-orbital-ecosystem {
+    min-height: 400px;
   }
 
-  .badge-top-right {
-    top: -10px;
-    right: 0;
+  .orbital-stage-wrap {
+    height: 400px;
   }
 
-  .badge-bottom-left {
-    bottom: -12px;
-    left: 0;
+  .ring-outer { width: 300px; height: 300px; }
+  .ring-middle { width: 230px; height: 230px; }
+  .ring-inner { width: 160px; height: 160px; }
+
+  .orbital-center-hub {
+    width: 190px;
   }
 
-  .badge-icon-circle {
-    width: 32px;
-    height: 32px;
+  .hub-ticket-glass {
+    padding: 12px 14px;
+  }
+
+  .hub-title {
     font-size: 0.88rem;
   }
 
-  .badge-text-col strong {
-    font-size: 0.78rem;
+  .orbital-badge {
+    padding: 4px 8px;
+    gap: 6px;
   }
 
-  .badge-text-col span {
-    font-size: 0.65rem;
+  .orbital-badge .badge-sub {
+    display: none;
   }
 
-  .countdown-card {
-    padding: 26px 20px;
+  .badge-icon {
+    width: 22px;
+    height: 22px;
+    font-size: 0.7rem;
   }
 
-  .countdown-timer-grid {
-    gap: 8px;
+  .badge-heading {
+    font-size: 0.72rem;
   }
 
-  .timer-val {
-    font-size: 1.6rem;
+  .card-countdown-panel {
+    padding: 6px 8px;
   }
 
-  .timer-box {
-    padding: 10px 4px;
+  .card-timer-num {
+    font-size: 1rem;
+  }
+
+  .card-timer-lbl {
+    font-size: 0.58rem;
   }
 
   .card-footer {

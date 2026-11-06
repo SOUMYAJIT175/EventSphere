@@ -1,17 +1,43 @@
 /**
  * EventSphere - Curated Events Database
- * Rich sample data covering Technology, Music, Sports, Education, Business, Arts & Culture.
+ * Scheduled between 6 November 2026 and 30 December 2026 (inclusive).
+ * Covers Technology, Music, Sports, Education, Business, Arts & Culture.
  */
 
-// Calculate dynamic future dates so the website always feels live and fresh
-const getFutureDate = (daysAhead, hours = 10, minutes = 0) => {
-  const d = new Date();
-  d.setDate(d.getDate() + daysAhead);
-  d.setHours(hours, minutes, 0, 0);
-  return d.toISOString();
-};
-
 const sampleEvents = [
+  {
+    id: "evt-tech-00",
+    title: "CyberShield India Summit: Zero-Trust Security 2026",
+    category: "Technology",
+    featured: false,
+    price: "₹999",
+    isFree: false,
+    date: "2026-11-06T09:00:00+05:30",
+    endDate: "2026-11-06T15:00:00+05:30",
+    dateDisplay: "Nov 06, 2026 • 09:00 AM IST",
+    venue: "Vigyan Bhavan Convention Center",
+    city: "New Delhi, NCR",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1000&q=80",
+    shortDescription: "A national symposium addressing cyber defense resilience, zero-trust cloud architectures, and proactive threat mitigation.",
+    fullDescription: "CyberShield India convened leading cybersecurity officers, CERT-In specialists, and security analysts. Keynotes focused on zero-trust enterprise security, AI-powered SOC automation, and quantum-resistant encryption. Attendees engaged in real-time red team vs. blue team defense simulations.",
+    highlights: [
+      "Keynote by Dr. Rajiv Nambiar on National Cyber Infrastructure",
+      "Live Ransomware Defense & Red-Teaming Simulation",
+      "Executive Briefing on India Data Protection Act (DPDP) Compliance",
+      "Enterprise Zero-Trust Implementation Playbook for all delegates"
+    ],
+    schedule: [
+      { time: "09:00 AM - 10:00 AM", title: "Registration & Morning Cyber Briefing" },
+      { time: "10:00 AM - 12:00 PM", title: "Keynote: Zero-Trust Architectures for Cloud Infrastructures" },
+      { time: "12:30 PM - 03:00 PM", title: "Live Cyber-Range Breach Simulation & Concluding Address" }
+    ],
+    speakers: [
+      { name: "Dr. Rajiv Nambiar", role: "Chief Information Security Strategist, CyberCore", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" }
+    ],
+    organizer: "National Cyber Defense Alliance",
+    seatsLeft: 0,
+    totalSeats: 300
+  },
   {
     id: "evt-tech-01",
     title: "Global Tech Innovators Summit 2026",
@@ -19,7 +45,8 @@ const sampleEvents = [
     featured: true,
     price: "₹1,499",
     isFree: false,
-    date: getFutureDate(12, 9, 30), // 12 days ahead for primary countdown!
+    date: "2026-11-15T09:30:00+05:30", // 9 days remaining from Nov 6
+    endDate: "2026-11-17T18:00:00+05:30",
     dateDisplay: "Nov 15, 2026 • 09:30 AM IST",
     venue: "Silicon Hall, Tech Park",
     city: "Bangalore, Karnataka",
@@ -55,7 +82,8 @@ const sampleEvents = [
     featured: true,
     price: "₹899",
     isFree: false,
-    date: getFutureDate(18, 17, 0),
+    date: "2026-11-21T17:00:00+05:30", // 15 days remaining from Nov 6
+    endDate: "2026-11-21T23:30:00+05:30",
     dateDisplay: "Nov 21, 2026 • 05:00 PM IST",
     venue: "Amphitheatre, Green Meadows",
     city: "Pune, Maharashtra",
@@ -88,7 +116,8 @@ const sampleEvents = [
     featured: false,
     price: "Free",
     isFree: true,
-    date: getFutureDate(25, 5, 45),
+    date: "2026-11-28T05:45:00+05:30", // 22 days remaining from Nov 6
+    endDate: "2026-11-28T13:00:00+05:30",
     dateDisplay: "Nov 28, 2026 • 05:45 AM IST",
     venue: "Central Promenade Boulevard",
     city: "Mumbai, Maharashtra",
@@ -98,29 +127,30 @@ const sampleEvents = [
     highlights: [
       "Choice of 5K Fun Run, 10K Timed Challenge, or 21K Half Marathon",
       "RFID bib timing tag, moisture-wicking dry-fit running jersey & medal",
-      "Post-race yoga cooldown led by celebrity instructors",
-      "Hydration zones, energy gels, and recovery massages"
+      "Pre-run dynamic warm-up led by Olympic marathon trainers",
+      "Post-race wellness festival with physio consultations & nutrition bars"
     ],
     schedule: [
       { time: "05:45 AM - 06:15 AM", title: "Warmup Zumba Session & Flag-off 21K" },
       { time: "06:30 AM - 06:45 AM", title: "Flag-off 10K and 5K Runners" },
-      { time: "08:30 AM - 10:00 AM", title: "Medal Ceremony & Wellness Breakfast Party" }
+      { time: "08:30 AM - 10:30 AM", title: "Medal Ceremony & Fitness Carnival Gala" }
     ],
     speakers: [
-      { name: "Captain Vikram Rathore", role: "Ultra-marathoner & Head Coach", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" }
+      { name: "Rohan Verma", role: "Ultra-Marathoner & Athletics Coach", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" }
     ],
-    organizer: "Mumbai Active Sports Council",
-    seatsLeft: 120,
+    organizer: "Metropolitan Athletics League",
+    seatsLeft: 320,
     totalSeats: 1500
   },
   {
     id: "evt-biz-04",
-    title: "VentureSpark: National Startup Expo",
+    title: "VentureSpark: Founder & Investor Summit",
     category: "Business",
     featured: true,
-    price: "₹1,199",
+    price: "₹1,499",
     isFree: false,
-    date: getFutureDate(32, 10, 0),
+    date: "2026-12-05T10:00:00+05:30", // 29 days remaining from Nov 6
+    endDate: "2026-12-06T18:00:00+05:30",
     dateDisplay: "Dec 05, 2026 • 10:00 AM IST",
     venue: "Grand Convention Center, Aerocity",
     city: "New Delhi, NCR",
@@ -154,146 +184,151 @@ const sampleEvents = [
     featured: false,
     price: "Free",
     isFree: true,
-    date: getFutureDate(38, 11, 0),
+    date: "2026-12-11T11:00:00+05:30", // 35 days remaining from Nov 6
+    endDate: "2026-12-12T17:00:00+05:30",
     dateDisplay: "Dec 11, 2026 • 11:00 AM IST",
     venue: "Auditorium Hall, National Science Center",
     city: "Hyderabad, Telangana",
     image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1000&q=80",
-    shortDescription: "Exploring personalized AI tutoring, modern pedagogy, and adaptive learning environments for K-12 and universities.",
-    fullDescription: "A national colloquium bringing together academic deans, EdTech pioneers, and researchers to reimagine modern higher education. Discover how cognitive AI tutors, augmented reality labs, and open digital credentialing are redefining how students learn and retain knowledge.",
+    shortDescription: "Exploring intelligent tutoring, personalized adaptive curricula, and responsible AI policies for schools and universities.",
+    fullDescription: "A national symposium addressing the seismic transformation of learning systems powered by generative AI. Leading educational psychologists, school chancellors, and EdTech pioneers will demonstrate breakthrough tools that personalize learning journeys and empower educators.",
     highlights: [
-      "Presentation of national research on AI pedagogical outcomes",
-      "Demonstrations of adaptive assessment engines",
-      "Policy roundtable with education ministry delegates",
-      "Free teacher enablement toolkit & digital certificate"
+      "Live demonstrations of real-time multi-lingual AI tutoring systems",
+      "Panel: Ethics, Assessment Integrity, and AI in STEM Higher Ed",
+      "Release of the National K-12 AI Integration Blueprint",
+      "Accredited Continuing Professional Development (CPD) certificate"
     ],
     schedule: [
       { time: "11:00 AM - 12:15 PM", title: "Keynote: Pedagogies for the Intelligence Age" },
       { time: "12:30 PM - 01:45 PM", title: "Live EdTech Showcase & Teacher Demos" },
-      { time: "02:30 PM - 04:00 PM", title: "Roundtable: Ethics, Plagiarism & Assessment" }
+      { time: "02:30 PM - 04:30 PM", title: "Breakout Workshops on Adaptive Curriculum Design" }
     ],
     speakers: [
-      { name: "Prof. Sudha Murthy", role: "Dean of Digital Learning, IIT Madras", avatar: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=200&q=80" }
+      { name: "Prof. Sunita Rao", role: "Chair of Educational Tech, IIT Hyderabad", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" }
     ],
-    organizer: "National EdTech Forum",
-    seatsLeft: 64,
-    totalSeats: 300
+    organizer: "EdTech Futures India",
+    seatsLeft: 120,
+    totalSeats: 500
   },
   {
     id: "evt-arts-06",
-    title: "KalaKriti: International Art & Heritage Fair",
+    title: "KalaKriti: Modern Art & Craft Biennale",
     category: "Arts & Culture",
-    featured: true,
-    price: "₹450",
+    featured: false,
+    price: "₹499",
     isFree: false,
-    date: getFutureDate(45, 14, 0),
-    dateDisplay: "Dec 18, 2026 • 02:00 PM IST",
+    date: "2026-12-16T14:00:00+05:30", // 40 days remaining from Nov 6
+    endDate: "2026-12-18T20:00:00+05:30",
+    dateDisplay: "Dec 16, 2026 • 02:00 PM IST",
     venue: "Royal Heritage Courtyard",
     city: "Jaipur, Rajasthan",
     image: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1000&q=80",
-    shortDescription: "Celebrate classical visual arts, pottery workshops, traditional folk dance, and contemporary sculpture exhibits.",
-    fullDescription: "KalaKriti celebrates the timeless beauty of indigenous crafts alongside modern avant-garde sculpture. Browse 50+ curated artist pavilions, attend live masterclasses on pottery, Madhubani painting, and block printing, and experience mesmerizing evening Rajasthani folk performances.",
+    shortDescription: "A sensory celebration of contemporary sculptures, traditional handloom showcases, and generative digital canvas installations.",
+    fullDescription: "KalaKriti unites traditional master artisans with cutting-edge digital artists in the majestic setting of Jaipur. Spanning five curated pavilions, the exhibition explores the timeless bridge between handmade heritage techniques and futuristic algorithmic art installations.",
     highlights: [
-      "Over 300 curated masterworks from across 18 Indian states",
-      "Live interactive pottery wheel & textile craft workshops",
-      "Sunset puppet theater and Sufi music evening",
-      "Curator-led gallery walkthroughs and art auctions"
+      "Over 350 curated physical and generative NFT art installations",
+      "Live handloom weaving and blue pottery masterclasses",
+      "Heritage architectural night walk with ambient soundscapes",
+      "Collector's art auction in aid of regional artisan guilds"
     ],
     schedule: [
       { time: "02:00 PM - 03:30 PM", title: "Gallery Tour & Artist Showcase Opening" },
       { time: "03:30 PM - 05:30 PM", title: "Hands-on Pottery & Painting Workshops" },
-      { time: "06:00 PM - 08:30 PM", title: "Evening Folk Dance & Sufi Musical Night" }
+      { time: "06:00 PM - 08:30 PM", title: "Night Illuminations & Classical Instrumental Jugalbandi" }
     ],
     speakers: [
-      { name: "Ananya Roy", role: "Master Ceramist & Sculptor", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" }
+      { name: "Ananya Singhania", role: "Curator & Contemporary Visual Artist", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" }
     ],
-    organizer: "Heritage Preservation Trust",
+    organizer: "Heritage Arts Council of Rajasthan",
     seatsLeft: 95,
-    totalSeats: 500
+    totalSeats: 600
   },
   {
     id: "evt-tech-07",
-    title: "Web3 & Cloud DevCon 2026",
+    title: "NextGen Web3 & Autonomous AI Hackathon",
     category: "Technology",
     featured: false,
-    price: "₹799",
-    isFree: false,
-    date: getFutureDate(52, 10, 0),
-    dateDisplay: "Dec 25, 2026 • 10:00 AM IST",
+    price: "Free",
+    isFree: true,
+    date: "2026-12-20T10:00:00+05:30", // 44 days remaining from Nov 6
+    endDate: "2026-12-22T19:00:00+05:30",
+    dateDisplay: "Dec 20, 2026 • 10:00 AM IST",
     venue: "T-Hub Innovation Center",
     city: "Hyderabad, Telangana",
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80",
-    shortDescription: "Hands-on coding sprints, smart contract security audits, zero-knowledge proofs, and serverless architectures.",
-    fullDescription: "DevCon brings together 1,000+ developers, devops wizards, and protocol architects for a full day of hardcore coding. Featuring practical sessions on Rust, Solidity, Kubernetes optimization, and edge computing.",
+    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80",
+    shortDescription: "A non-stop 36-hour code marathon solving high-stakes challenges in decentralized protocols, smart agents, and edge computing.",
+    fullDescription: "Gathering 500 elite engineers, smart contract developers, and AI practitioners under one roof. Teams will build production-grade prototypes with direct mentorship from protocol architects and venture incubators. Prizes include ₹15 Lakhs in developer grants and fast-track seed funding.",
     highlights: [
-      "Hands-on smart contract security & fuzzing lab",
-      "24-Hour Micro-Hackathon with cash rewards",
-      "DevOps speed challenge: deploy resilient microservices in minutes",
-      "Exclusive swag bag, sticker packs, and lunch"
+      "₹15 Lakhs total prize pool + ₹50 Lakhs seed incubation grants",
+      "API bounties from leading blockchain and cloud foundation partners",
+      "24/7 dedicated mentor bullpen with protocol core contributors",
+      "Unlimited energy drinks, catered meals & developer comfort pods"
     ],
     schedule: [
       { time: "10:00 AM - 11:30 AM", title: "Opening Keynote: Future of Edge Computing" },
       { time: "11:45 AM - 01:30 PM", title: "Zero-Knowledge Proofs & Rust Sprints" },
-      { time: "02:30 PM - 05:30 PM", title: "Live Hackathon Submissions & Winner Demos" }
+      { time: "02:00 PM - 07:00 PM", title: "Hacking Starts & Mentor Clinic Checkpoints" }
     ],
     speakers: [
-      { name: "Siddharth Verma", role: "Principal Architect, BlockScale", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" }
+      { name: "Varun Reddy", role: "Head of Developer Ecosystem, HyperChain Labs", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" }
     ],
-    organizer: "DevCon India Society",
-    seatsLeft: 50,
-    totalSeats: 300
+    organizer: "T-Hub Hackathon Foundation",
+    seatsLeft: 64,
+    totalSeats: 500
   },
   {
     id: "evt-music-08",
-    title: "Symphony Under the Sky: Classical Fusion",
+    title: "Winter Symphony: Classical Fusion Gala",
     category: "Music",
     featured: false,
-    price: "₹1,250",
+    price: "₹799",
     isFree: false,
-    date: getFutureDate(59, 18, 30),
-    dateDisplay: "Jan 01, 2027 • 06:30 PM IST",
+    date: "2026-12-23T18:30:00+05:30", // 47 days remaining from Nov 6
+    endDate: "2026-12-23T22:30:00+05:30",
+    dateDisplay: "Dec 23, 2026 • 06:30 PM IST",
     venue: "Victoria Open Grounds",
     city: "Kolkata, West Bengal",
-    image: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=1000&q=80",
-    shortDescription: "A grand 40-piece orchestral fusion blending Indian classical ragas with Western symphony arrangements.",
-    fullDescription: "Experience an auditory masterpiece as traditional sitar, sarod, and tabla harmoniously converse with violins, cellos, and brass. Led by acclaimed maestro conductors, this evening is tailored for true connoisseurs of pure musical excellence.",
+    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1000&q=80",
+    shortDescription: "Experience world-class Indian classical sitar and sarod virtuosos collaborating with a 40-piece Western chamber orchestra.",
+    fullDescription: "A landmark symphonic production celebrating the harmonious dialogue between North Indian raga improvisations and European classical orchestrations. Set against historic colonnades with bespoke acoustic shell engineering.",
     highlights: [
-      "40-piece live philharmonic orchestra featuring renowned soloists",
-      "Open-sky acoustic pavilion with 3D spatial surround sound",
-      "Pre-show talk on classical raga theory by the conductor",
-      "Complimentary wine or artisanal mocktail voucher with every VIP pass"
+      "World premiere concerto composed by Grammy-nominated maestro Joydeep Sen",
+      "40-piece chamber orchestra performing alongside classical Indian masters",
+      "High-fidelity acoustic shell designed specifically for outdoor symphonies",
+      "Commemorative vinyl record and program guide included for Premium tier"
     ],
     schedule: [
       { time: "06:30 PM - 07:15 PM", title: "Raga Yaman Orchestral Overture" },
       { time: "07:30 PM - 08:45 PM", title: "East-West Symphonic Concerto" },
-      { time: "09:00 PM - 10:00 PM", title: "Grand Finale: The Dawn of Hope Rhapsody" }
+      { time: "09:00 PM - 10:15 PM", title: "Grand Finale: Tarana in D Minor" }
     ],
     speakers: [
-      { name: "Maestro Debanjan Sen", role: "Symphony Conductor & Sitarist", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80" }
+      { name: "Joydeep Sen", role: "Sitar Maestro & Symphonic Composer", avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80" }
     ],
-    organizer: "Bengal Cultural Society",
-    seatsLeft: 30,
-    totalSeats: 600
+    organizer: "Kolkata Philharmonic Society",
+    seatsLeft: 84,
+    totalSeats: 700
   },
   {
     id: "evt-sports-09",
-    title: "National Inter-Collegiate Badminton Open",
+    title: "National Inter-Club Badminton Championship",
     category: "Sports",
     featured: false,
-    price: "₹350",
+    price: "₹299",
     isFree: false,
-    date: getFutureDate(66, 8, 30),
-    dateDisplay: "Jan 08, 2027 • 08:30 AM IST",
+    date: "2026-12-26T08:30:00+05:30", // 50 days remaining from Nov 6
+    endDate: "2026-12-27T19:30:00+05:30",
+    dateDisplay: "Dec 26, 2026 • 08:30 AM IST",
     venue: "Indira Gandhi Indoor Stadium",
     city: "New Delhi, Delhi",
     image: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=1000&q=80",
-    shortDescription: "Witness fierce smashes and nail-biting rallies as India's top 64 collegiate badminton prodigies battle for glory.",
-    fullDescription: "The most anticipated collegiate badminton championship of the year. Featuring singles and doubles tournaments across Men's, Women's, and Mixed categories. Professional Yonex synthetic courts, BWF certified umpires, and live YouTube streaming.",
+    shortDescription: "Top seeded national shuttlers battle across singles, doubles, and mixed categories in high-speed, heart-stopping matches.",
+    fullDescription: "India's premier domestic badminton showdown bringing together rising youth prodigies and seasoned Olympians. Competing on BWF-standard synthetic courts with Hawk-Eye line calling and digital scoreboards.",
     highlights: [
-      "64 top ranked collegiate players competing across 4 brackets",
-      "BWF certified tournament conditions with live hawk-eye replays",
-      "Cash prize pool worth ₹5,00,000 for winners & runners-up",
-      "Fan zone with fast-serve speed radar challenges"
+      "BWF Grade-A sanctioned competitive scoring and courts",
+      "Live multi-angle LED courtside replays and Hawk-Eye tracking",
+      "Post-match autograph and photo zone with Olympic medalists",
+      "Exclusive sports merchandise stalls and Yonex racquet demo stations"
     ],
     schedule: [
       { time: "08:30 AM - 12:30 PM", title: "Quarter Finals (Singles & Doubles)" },
@@ -314,8 +349,9 @@ const sampleEvents = [
     featured: false,
     price: "₹399",
     isFree: false,
-    date: getFutureDate(73, 16, 0),
-    dateDisplay: "Jan 15, 2027 • 04:00 PM IST",
+    date: "2026-12-28T16:00:00+05:30", // 52 days remaining from Nov 6
+    endDate: "2026-12-29T21:00:00+05:30",
+    dateDisplay: "Dec 28, 2026 • 04:00 PM IST",
     venue: "Prithvi Cine Pavilion",
     city: "Mumbai, Maharashtra",
     image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1000&q=80",
@@ -346,8 +382,9 @@ const sampleEvents = [
     featured: false,
     price: "₹1,899",
     isFree: false,
-    date: getFutureDate(80, 9, 0),
-    dateDisplay: "Jan 22, 2027 • 09:00 AM IST",
+    date: "2026-12-29T09:00:00+05:30", // 53 days remaining from Nov 6
+    endDate: "2026-12-29T18:00:00+05:30",
+    dateDisplay: "Dec 29, 2026 • 09:00 AM IST",
     venue: "JW Marriott Ballroom",
     city: "Mumbai, Maharashtra",
     image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1000&q=80",
@@ -373,13 +410,14 @@ const sampleEvents = [
   },
   {
     id: "evt-edu-12",
-    title: "Global Higher Education & Career Fair 2027",
+    title: "Global Higher Education & Career Fair 2026",
     category: "Education",
     featured: false,
     price: "Free",
     isFree: true,
-    date: getFutureDate(88, 10, 0),
-    dateDisplay: "Jan 30, 2027 • 10:00 AM IST",
+    date: "2026-12-30T10:00:00+05:30", // 54 days remaining from Nov 6
+    endDate: "2026-12-30T18:00:00+05:30",
+    dateDisplay: "Dec 30, 2026 • 10:00 AM IST",
     venue: "World Trade Center Hall 3",
     city: "Chennai, Tamil Nadu",
     image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80",
